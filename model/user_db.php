@@ -40,5 +40,6 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
     $statement->bindValue(':is_sv', $is_sv);
     $statement->bindValue(':is_truongbomon', $is_truongbomon);
     $statement->execute();
+    
 }
 ?>
