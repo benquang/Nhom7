@@ -2,7 +2,7 @@
 
 <?php   
     $account_url = $app_path . 'admin';
-    $view_register_gv_url = $account_url . '?action=view_register_gv';
+    $view_register_gv_url = $account_url . '?action=register_gv';
 ?>
 <a href="<?php echo $view_register_gv_url; ?>">Dang ky giang vien</a>
 <?php if (isset($_SESSION['user'])) : ?>

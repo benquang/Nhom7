@@ -4,11 +4,16 @@ function is_valid_taikhoan($taikhoan) {
     $query = '
         SELECT taikhoan FROM "user"
         WHERE taikhoan = :taikhoan';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':taikhoan', $taikhoan);
-    $statement->execute();
-    $valid = ($statement->rowCount() == 1);
-    $statement->closeCursor();
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->execute();
+        $valid = ($statement->rowCount() == 1);
+        $statement->closeCursor();
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
     return $valid;
 }
 /*function get_user($taikhoan) { // return class
@@ -32,14 +37,23 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
     $query = '
         INSERT INTO "user"
         VALUES (:taikhoan, :password, :is_admin, :is_gv, :is_sv, :is_truongbomon)';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':taikhoan', $taikhoan);
-    $statement->bindValue(':password', $password);
-    $statement->bindValue(':is_admin', $is_admin);
-    $statement->bindValue(':is_gv', $is_gv);
-    $statement->bindValue(':is_sv', $is_sv);
-    $statement->bindValue(':is_truongbomon', $is_truongbomon);
-    $statement->execute();
-    
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->bindValue(':password', $password);
+        $statement->bindValue(':is_admin', $is_admin);
+        $statement->bindValue(':is_gv', $is_gv);
+        $statement->bindValue(':is_sv', $is_sv);
+        $statement->bindValue(':is_truongbomon', $is_truongbomon);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    } catch (PDOException $e) {
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
+    }
+
 }
 ?>

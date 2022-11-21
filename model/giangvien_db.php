@@ -15,9 +15,11 @@ function add_giangvien($taikhoan, $hovaten, $cdkh, $chuyennganh, $chucvu) { //vo
 
         $statement->execute();
         $statement->closeCursor();
+        return true;
     } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
     }
 }
 ?>
