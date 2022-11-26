@@ -18,6 +18,11 @@ if ($action == NULL) {
 // Set up all possible fields to validate
 
 switch ($action) {
+
+    case 'register_sv':
+        include 'admin/view_register_sv.php';
+        break;
+
     case 'register_gv':  //this is POST
         //not to get this action, just POST
         if ($action == filter_input(INPUT_POST, 'action')){
