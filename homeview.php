@@ -3,8 +3,12 @@
 <?php   
     $account_url = $app_path . 'admin';
     $view_register_gv_url = $account_url . '?action=register_gv';
+
+    $view_register_sv_url = $account_url . '?action=register_sv';
 ?>
-<a href="<?php echo $view_register_gv_url; ?>">Dang ky giang vien</a>
+<a href="<?php echo $view_register_gv_url; ?>"><h3>Dang ky giang vien</h3></a>
+
+<a href="<?php echo $view_register_sv_url; ?>"><h3>Dang ky sinh vien</h3></a>
 <?php if (isset($_SESSION['user'])) : ?>
     <h1><?php echo $_SESSION['user']['taikhoan']; ?></h1>
 <?php endif; ?>
