@@ -35,12 +35,14 @@ if (!isset($message)) { $message = ''; }
                value="<?php echo $ngaysinh; ?>"
                size="30">
 
-        <lable for="<?php echo $gioitinh; ?>">Gioi tinh:</lable>
-        <select id="cars">
+        
+        
+        <label for="<?php echo $gioitinh; ?>">Gioi tinh:</label>
+        <select name="<?php echo $gioitinh; ?>" id="<?php echo $gioitinh; ?>">
             <option value="True">Nam</option>
             <option value="False">Nu</option>
         </select>
-        
+
         <label>Doi tuong:</label>
         <select name="doituong">
             <?php

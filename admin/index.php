@@ -2,6 +2,7 @@
 require_once('../util/main.php');
 require_once('model/user_db.php');
 require_once('model/giangvien_db.php');
+require_once('model/sinhvien_db.php');
 
 //get both get and post 
 $action = filter_input(INPUT_POST, 'action');
@@ -39,11 +40,21 @@ switch ($action) {
             $chuyennganh = filter_input(INPUT_POST, 'chuyennganh');
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
+            if (is_valid_taikhoan($taikhoan)) {
+                $message = 'Tai khoan da ton tai';
+                include 'admin/view_register_sv.php';
+                break;
+            }
+          
+            
+            
+
+
             if(add_user($taikhoan,$password,$is_admin,$is_gv,$is_sv,$is_truongbomon)) {
                 if(add_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy)){
                     $message = 'Dang ky thanh cong';
                 } else {
-                    $message = 'add giang vien khong thanh cong';
+                    $message = 'add sinh vien khong thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 }
