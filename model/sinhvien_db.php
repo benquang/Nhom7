@@ -14,7 +14,7 @@ function add_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lo
         $statement->bindValue(':doituong', $doituong);
         $statement->bindValue(':ctdt', $ctdt);
         $statement->bindValue(':lop', $lop);
-        $statement->bindValue(':chuyenganh', $chuyennganh);
+        $statement->bindValue(':chuyennganh', $chuyennganh);
         $statement->bindValue(':tinchitichluy', $tinchitichluy);
         
 
