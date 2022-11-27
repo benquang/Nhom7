@@ -56,4 +56,21 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
     }
 
 }
+
+function get_one_user($taikhoan) {
+    global $db;
+    $query = 'SELECT * FROM user ';
+    
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 ?>

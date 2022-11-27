@@ -20,6 +20,10 @@ if ($action == NULL) {
 
 switch ($action) {
 
+    case 'view_sv':
+        include 'admin/view_view_sv.php';
+        break;
+
     case 'register_sv':
         if ($action == filter_input(INPUT_POST, 'action')){
         //user

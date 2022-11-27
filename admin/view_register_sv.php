@@ -34,10 +34,6 @@ if (!isset($message)) { $message = ''; }
         <input type="date" name="ngaysinh"
                value="<?php echo $ngaysinh; ?>"
                size="30">
-
-        
-        
-        
         
         <label>Gioi tinh:</label>
         <select name="gioitinh">
