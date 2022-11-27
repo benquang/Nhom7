@@ -34,13 +34,11 @@ if (!isset($message)) { $message = ''; }
         <input type="date" name="ngaysinh"
                value="<?php echo $ngaysinh; ?>"
                size="30">
-
         
-        
-        <label for="<?php echo $gioitinh; ?>">Gioi tinh:</label>
-        <select name="<?php echo $gioitinh; ?>" id="<?php echo $gioitinh; ?>">
-            <option value="True">Nam</option>
-            <option value="False">Nu</option>
+        <label>Gioi tinh:</label>
+        <select name="gioitinh">
+            <option value="true">Nam</option>
+            <option value="false">Nu</option>
         </select>
 
         <label>Doi tuong:</label>

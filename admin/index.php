@@ -20,6 +20,10 @@ if ($action == NULL) {
 
 switch ($action) {
 
+    case 'view_sv':
+        include 'admin/view_view_sv.php';
+        break;
+
     case 'register_sv':
         if ($action == filter_input(INPUT_POST, 'action')){
         //user
@@ -29,7 +33,9 @@ switch ($action) {
             $is_gv = 'false';
             $is_sv = 'true';
             $is_truongbomon = 'false';
-        
+            
+
+
             //ttsinhvien
             $hovaten = filter_input(INPUT_POST, 'hovaten');
             $ngaysinh = filter_input(INPUT_POST, 'ngaysinh');
@@ -46,10 +52,7 @@ switch ($action) {
                 break;
             }
           
-            //
-            
-
-
+                        
             if(add_user($taikhoan,$password,$is_admin,$is_gv,$is_sv,$is_truongbomon)) {
                 if(add_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy)){
                     $message = 'Dang ky thanh cong';
@@ -63,7 +66,6 @@ switch ($action) {
                 include 'admin/view_register_sv.php';
                 break;
             }
-
         
         }
         include 'admin/view_register_sv.php';
