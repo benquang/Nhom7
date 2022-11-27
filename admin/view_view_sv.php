@@ -59,6 +59,7 @@ table, th, td {
                 <form action="view_update_sv.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $sinhvien['user'] ?>">
                     <td><input type="submit" name="edit" value="Edit"></td>
+                </form>
                 <td><a href="" class="button">Delete</a></td>
             </tr>
         <?php endforeach; ?>
