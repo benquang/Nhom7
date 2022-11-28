@@ -22,10 +22,19 @@ table, th, td {
     </thead>
     <tbody>
         <?php
+            $item_per_page = 4;
+            $curent_page = 1;
+            $offset = ($curent_page - 1) * $item_per_page;
+
             require_once('model/database.php');
             require_once('model/sinhvien_db.php');
-                    
-            $sinhviens = get_all_sinhvien();
+            $sinhviens = get_sinhvien_paging($item_per_page, $offset);
+            //count
+            $totalRecords = count_sinhvien();
+            $totalPages = ceil($totalRecords / $item_per_page);
+
+
+            //$sinhviens = get_all_sinhvien();
             foreach($sinhviens as $sinhvien) :
                 //set bien
                 $taikhoan = $sinhvien['user'];
@@ -59,10 +68,12 @@ table, th, td {
                 <form action="view_update_sv.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $sinhvien['user'] ?>">
                     <td><input type="submit" name="edit" value="Edit"></td>
+                    
                 </form>
                 <td><a href="" class="button">Delete</a></td>
             </tr>
         <?php endforeach; ?>
+        <?php include '../view/pagination.php'; ?>
     </tbody>
 </table>
 

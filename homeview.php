@@ -7,7 +7,10 @@
     $view_register_sv_url = $account_url . '?action=register_sv';
 
     $view_view_sv_url = $account_url . '?action=view_sv';
+
+
 ?>
+
 <a href="<?php echo $view_register_gv_url; ?>"><h3>Dang ky giang vien</h3></a>
 
 <a href="<?php echo $view_register_sv_url; ?>"><h3>Dang ky sinh vien</h3></a>
