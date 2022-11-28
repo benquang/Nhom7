@@ -8,9 +8,13 @@
 </head>
 <body>
     <?php 
-        $idd = $_POST['id'];
+        include '../model/database.php';
+        include '../model/user_db.php';
+        include '../model/sinhvien_db.php';
+        $id = $_POST['id'];
+        $sinhvien = get_one_sinhvien($id);
+        $hovaten = $sinhvien['hovaten'];
     ?>
-    <a><?php echo $idd; ?></a>
-    <h4> alola</h4>
+    <a><?php echo $hovaten; ?></a>
 </body>
 </html>

@@ -16,7 +16,7 @@ function is_valid_taikhoan($taikhoan) {
     }
     return $valid;
 }
-/*function get_user($taikhoan) { // return class
+function get_user($taikhoan) { // return class
     global $db;
     $query = '
         SELECT * FROM "user"
@@ -28,7 +28,7 @@ function is_valid_taikhoan($taikhoan) {
     
     $statement->closeCursor();
     return $user;
-}*/
+}
 function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon) { //void
     global $db;
     //$user = new User();
@@ -59,7 +59,7 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
 
 function get_one_user($taikhoan) {
     global $db;
-    $query = 'SELECT * FROM user ';
+    $query = "SELECT * FROM user WHERE taikhoan=".$taikhoan."";
     
     try {
         $statement = $db->prepare($query);

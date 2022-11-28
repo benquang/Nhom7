@@ -48,19 +48,23 @@ function get_all_sinhvien() {
 
 function get_one_sinhvien($taikhoan) {
     global $db;
-    $query = "SELECT * FROM sinhvien WHERE user='$taikhoan'";
-    
+    $query = '
+        SELECT * 
+        FROM "sinhvien" 
+        WHERE sinhvien.user = :taikhoan';
     try {
         $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
         $statement->execute();
-        $result = $statement->fetchAll();
+        $result = $statement->fetch();
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
-        return null;
-    }
+    } 
 }
+
+
 
 ?>
