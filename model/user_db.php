@@ -57,14 +57,16 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
 
 }
 
-function get_one_user($taikhoan) {
+function get_one_user($tk) {
     global $db;
-    $query = "SELECT * FROM user WHERE taikhoan=".$taikhoan."";
+    $query = '
+    SELECT * FROM "user" WHERE taikhoan= :tk';
     
     try {
         $statement = $db->prepare($query);
+        $statement->bindValue(':tk', $tk);
         $statement->execute();
-        $result = $statement->fetchAll();
+        $result = $statement->fetch();
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
