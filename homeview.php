@@ -8,6 +8,9 @@
 
     $view_view_sv_url = $account_url . '?action=view_sv';
 
+    //tam thoi
+    $item_per_page = 1;
+
     $view_view_sv_pagination_url = $view_view_sv_url . '&perpage=' . $item_per_page .'&page=1';
 
 

@@ -17,16 +17,17 @@ table, th, td {
             <th>Lop</th>
             <th>Chuyen nganh</th>
             <th>Tin chi tich luy</th>
-            <th>Hanh dong</th>
+            <th>Sua</th>
+            <th>Xoa</th>
         </tr>
     </thead>
     <tbody>
         <?php
 
             $item_per_page = !empty((int)filter_input(INPUT_GET, 'perpage'))?(int)filter_input(INPUT_GET, 'perpage'):10;
-            $curent_page = (int)filter_input(INPUT_GET, 'page');
+            $current_page = (int)filter_input(INPUT_GET, 'page');
 
-            $offset = ($curent_page - 1) * $item_per_page;
+            $offset = ($current_page - 1) * $item_per_page;
 
             
 
@@ -70,11 +71,15 @@ table, th, td {
                 <td><?php echo $tinchitichluy; ?></td>
 
                 <form action="view_update_sv.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $sinhvien['user'] ?>">
-                    <td><input type="submit" name="edit" value="Edit"></td>
+                    <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
+                    <th><input type="submit" name="edit" value="Edit"></td>
                     
                 </form>
-                <td><a href="" class="button">Delete</a></td>
+                <!--Can sua doan nay-->
+                <form action = "." method="post" >
+                    <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
+                    <th><input type="submit" name="delete" value="Delete"></td>
+                </form>
             </tr>
         <?php endforeach; ?>
         <?php include '../view/pagination.php'; ?>
