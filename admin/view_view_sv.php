@@ -22,9 +22,13 @@ table, th, td {
     </thead>
     <tbody>
         <?php
-            $item_per_page = 4;
-            $curent_page = 1;
+
+            $item_per_page = !empty((int)filter_input(INPUT_GET, 'perpage'))?(int)filter_input(INPUT_GET, 'perpage'):10;
+            $curent_page = (int)filter_input(INPUT_GET, 'page');
+
             $offset = ($curent_page - 1) * $item_per_page;
+
+            
 
             require_once('model/database.php');
             require_once('model/sinhvien_db.php');
