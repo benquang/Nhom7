@@ -56,6 +56,7 @@ switch ($action) {
             if(add_user($taikhoan,$password,$is_admin,$is_gv,$is_sv,$is_truongbomon)) {
                 if(add_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy)){
                     $message = 'Dang ky thanh cong';
+                    
                 } else {
                     $message = 'add sinh vien khong thanh cong';
                     include 'admin/view_register_sv.php';
