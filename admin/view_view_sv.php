@@ -1,4 +1,6 @@
 <?php include '../view/header.php'; ?>
+<?php if (!isset($message)) { $message = ''; } ?>
+
 <style>
 table, th, td {
   border:1px solid black;
@@ -31,15 +33,15 @@ table, th, td {
 
             
 
-            require_once('model/database.php');
-            require_once('model/sinhvien_db.php');
-            $sinhviens = get_sinhvien_paging($item_per_page, $offset);
+            require_once('../model/database.php');
+            require_once('../model/sinhvien_db.php');
+            //$sinhviens = get_sinhvien_paging($item_per_page, $offset);
             //count
             $totalRecords = count_sinhvien();
             $totalPages = ceil($totalRecords / $item_per_page);
 
 
-            //$sinhviens = get_all_sinhvien();
+            $sinhviens = get_all_sinhvien();
             foreach($sinhviens as $sinhvien) :
                 //set bien
                 $taikhoan = $sinhvien['user'];
@@ -82,8 +84,8 @@ table, th, td {
                 </form>
             </tr>
         <?php endforeach; ?>
-        <?php include '../view/pagination.php'; ?>
+        <?php # include '../view/pagination.php'; ?>
     </tbody>
 </table>
-
+<span class="error"><?php echo $message; ?></span><br>
 <?php include '../view/footer.php'; ?>

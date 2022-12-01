@@ -68,12 +68,13 @@ function get_one_user($tk) {
         $statement->execute();
         $result = $statement->fetch();
         $statement->closeCursor();
-        return $result;
+        
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
         return null;
     }
+    return $result;
 }
 
 function delete_user($taikhoan){
@@ -83,6 +84,22 @@ function delete_user($taikhoan){
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->execute();
+        $statement->closeCursor();
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    } 
+}
+
+function update_user($taikhoan, $password){
+    global $db;
+    $password = sha1($taikhoan . $password);
+    $query = 'UPDATE "user" SET pass = :mk where "user".taikhoan = :tk';
+    try {
+        $statement = $db->query($query);
+        $statement->bindValue(':tk', $taikhoan);
+        $statement->bindValue(':mk', $password);
         $statement->execute();
         $statement->closeCursor();
     } catch (PDOException $e) {
