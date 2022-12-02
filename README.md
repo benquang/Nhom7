@@ -1,9 +1,9 @@
 ## Công Nghệ Phần Mềm
 ### Nhóm 15
 #### Thành viên nhóm:
-* Nguyễn Khoa Quang Thắng 
-* Trần Văn Kiệt 20110650
-* 
+* Nguyễn Khoa Quang Thắng - 20133090
+* Trần Văn Kiệt - 20110650
+* Nguyễn Trí Dũng - 20133029
 #### Yêu cầu bài tập nhóm:
 
 * Nhóm phải quay phim lại ít nhất 1 lần nhóm có thảo luận về bài tập (các thành viên phải bật camera) trên trang học online: https://workon.space/room/6364dd748c6c331b5fa33413
