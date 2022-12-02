@@ -1,5 +1,9 @@
 <?php include '../view/header.php'; ?>
+<?php
+$loaidetai = filter_input(INPUT_POST, 'id');
 
+
+?>
 <style>
     table,
     th,
@@ -11,8 +15,10 @@
     <thead>
         <tr>
             <th>STT</th>
-            <th>Loai de tai</th>
-            <th>Xem chi tiet</th>
+            <th>Ten de tai</th>
+            <th>GVHD</th>
+            <th>Chi tiet</th>
+            <th>Them hoi dong</th>
         </tr>
     </thead>
     <tbody>
@@ -26,28 +32,35 @@
 
 
         require_once('../model/database.php');
-        require_once('../model/loaidetai_db.php');
+        require_once('../model/chitietdetai_db.php');
+        require_once('../model/giangvien_db.php');
         //$sinhviens = get_sinhvien_paging($item_per_page, $offset);
         //count
         //$totalRecords = count_sinhvien();
         //$totalPages = ceil($totalRecords / $item_per_page);
 
-        $loaidetais = get_all_loaidetai();
+        $detais = get_all_detai($loaidetai);
         $i = 0;
-        foreach ($loaidetais as $loaidetai) :
+        foreach ($detais as $detai) :
             $i++;
-            $tenloai = $loaidetai['loaidetai'];
+            $tendetai = $detai['tendetai'];
+            $gvhd = get_one_giangvien($detai['gvhuongdan'])['hovaten'];
 
 
         ?>
             <tr>
                 <td><?php echo $i; ?></td>
-                <td><?php echo $tenloai; ?></td>
-                <form action="view_danhsachdetai.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $tenloai; ?>">
+                <td><?php echo $tendetai; ?></td>
+                <td><?php echo $gvhd; ?></td>
+                <form action="view_chitietdetai.php" method="post">
+                    <!-- truyen id -->
+                    <input type="hidden" name="id" value="<?php echo $detai['id'] ?>">
                     <th><input type="submit" name="view" value="Xem chi tiet"></td>
                 </form>
-
+                <form action="view_themhoidong.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $tendetai; ?>">
+                    <th><input type="submit" name="view" value="Them hoi dong"></td>
+                </form>
 
             </tr>
         <?php endforeach; ?>
