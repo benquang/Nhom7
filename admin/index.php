@@ -94,7 +94,7 @@ switch ($action) {
         if ($action == filter_input(INPUT_POST, 'action')){
             //user
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
-            $pass = filter_input(INPUT_POST, 'pass');     
+            //$pass = filter_input(INPUT_POST, 'pass');     
 
             $is_admin = filter_input(INPUT_POST, 'is_admin');
             if (isset($is_admin)) {
@@ -187,18 +187,13 @@ switch ($action) {
         include 'admin/view_register_sv.php';
         break;
     case 'update_sv':
-        if ($action == filter_input(INPUT_POST, 'action')) {
+        if ($action == filter_input(INPUT_POST, 'action')){
             //user
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
-            $password = filter_input(INPUT_POST, 'password');
-            $is_admin = 'false';
-            $is_gv = 'false';
-            $is_sv = 'true';
-            $is_truongbomon = 'false';
+            //$pass = filter_input(INPUT_POST, 'pass');     
 
 
-
-            //ttsinhvien
+            //lấy para từ post
             $hovaten = filter_input(INPUT_POST, 'hovaten');
             $ngaysinh = filter_input(INPUT_POST, 'ngaysinh');
             $gioitinh = filter_input(INPUT_POST, 'gioitinh');
@@ -208,30 +203,20 @@ switch ($action) {
             $chuyennganh = filter_input(INPUT_POST, 'chuyennganh');
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
-            if (is_valid_taikhoan($taikhoan)) {
-                $message = 'Tai khoan da ton tai';
-                include 'admin/view_register_sv.php';
+            //đổi thông tin
+            if (update_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy)) {
+                $message = 'Update thành công';
+                include 'admin/view_update_sv.php';
                 break;
-            }
-
-
-            if (add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon)) {
-                if (add_sinhvien($taikhoan, $hovaten, $ngaysinh, $gioitinh, $doituong, $ctdt, $lop, $chuyennganh, $tinchitichluy)) {
-                    $message = 'Dang ky thanh cong';
-                    include 'admin/view_register_sv.php';
-                    break;
-                } else {
-                    $message = 'add sinh vien khong thanh cong';
-                    include 'admin/view_register_sv.php';
-                    break;
-                }
             } else {
-                $message = 'add user khong thanh cong';
-                include 'admin/view_register_sv.php';
+                $message = 'Update không thành công !';
+                include 'admin/view_update_sv.php';
                 break;
             }
+
         }
-        include 'admin/view_register_sv.php';
+
+        include 'admin/view_update_sv.php';
         break;
     default:
         display_error("Unknown account action: " . $action);
