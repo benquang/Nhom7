@@ -82,6 +82,7 @@ table, th, td {
                 </form>
                 <!--Can sua doan nay-->
                 <form action = "delete_sinhvien.php" method="post" >
+                    <input type="hidden" name="action" value="delete_sv">
                     <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
                     <th><input type="submit" name="delete" value="Delete"></td>
                 </form>

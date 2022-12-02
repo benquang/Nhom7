@@ -67,7 +67,8 @@
 
                 </form>
                 <!--Can sua doan nay-->
-                <form action="delete_giangvien.php" method="post">
+                <form action="." method="post">
+                    <input type="hidden" name="action" value="delete_gv">
                     <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
                     <th><input type="submit" name="delete" value="Delete"></td>
                 </form>

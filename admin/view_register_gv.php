@@ -58,6 +58,10 @@ if (!isset($message)) { $message = ''; }
         <label>&nbsp;</label>
         <input type="submit" value="Dang ky">
     </form>
+    <form action="." method="post">
+        <input type="hidden" name="action" value="view_gv">
+        <th><input type="submit" name="cancel" value="Cancel"></td>
+    </form>
     <span class="error"><?php echo $message; ?></span><br>
 </main>
 <?php include '../view/footer.php'; ?>
