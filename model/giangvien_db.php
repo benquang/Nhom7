@@ -56,4 +56,25 @@ function delete_giangvien($taikhoan)
         display_db_error($error_message);
     }
 }
+
+function get_one_giangvien($taikhoan)
+{
+    global $db;
+    $query = '
+        SELECT * 
+        FROM "giangvien" 
+        WHERE giangvien.user = :taikhoan';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+    }
+    return $result;
+}
 ?>

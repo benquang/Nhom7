@@ -10,10 +10,16 @@
 
     $view_view_gv_url = $account_url . '?action=view_gv';
 
+    $view_view_dsdt_url = $account_url . '?action=view_loaidetai';
+
+    $view_view_ddk_url = $account_url . '?action=view_dotdangky';
+
     //tam thoi
     $item_per_page = 10;
 
     $view_view_sv_pagination_url = $view_view_sv_url . '&perpage=' . $item_per_page .'&page=1';
+
+
 
 
 ?>
@@ -25,6 +31,10 @@
 <a href="<?php echo $view_view_sv_url; ?>"><h3>Xem thong tin sinh vien</h3></a>
 
 <a href="<?php echo $view_view_gv_url; ?>"><h3>Xem thong tin giang vien</h3></a>
+
+<a href="<?php echo $view_view_dsdt_url; ?>"><h3>Xem danh sach de tai</h3></a>
+
+<a href="<?php echo $view_view_ddk_url; ?>"><h3>Xem danh sach dot dang ky</h3></a>
 <?php if (isset($_SESSION['user'])) : ?>
     <h1><?php echo $_SESSION['user']['taikhoan']; ?></h1>
 <?php endif; ?>

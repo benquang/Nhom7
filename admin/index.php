@@ -20,6 +20,20 @@ if ($action == NULL) {
 
 switch ($action) {
 
+    case 'register_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')) {
+            
+
+        }
+
+    case 'view_dotdangky':
+        include '../admin/view_view_ddk.php';
+        break;
+
+    case 'view_loaidetai':
+        include '../admin/view_view_loaidetai.php'; 
+        break;
+
     case 'delete_sv':
         $taikhoan = filter_input(INPUT_POST, 'id');
         require_once('../model/database.php');
