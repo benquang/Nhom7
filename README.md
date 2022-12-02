@@ -1,7 +1,7 @@
 ## Công Nghệ Phần Mềm
 ### Nhóm 15
 #### Thành viên nhóm:
-* Nguyễn Khoa Quang Thắng 20110739
+* Nguyễn Khoa Quang Thắng 
 * Trần Văn Kiệt 20110650
 * 
 #### Yêu cầu bài tập nhóm:
