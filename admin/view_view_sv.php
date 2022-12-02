@@ -1,15 +1,10 @@
 <?php include '../view/header.php'; ?>
-<?php if (!isset($message)) { $message = ''; } ?>
-
 <style>
 table, th, td {
   border:1px solid black;
 }
 </style>
-<form action = "." method="post" >
-                    <input type="hidden" name="action" value="register_sv">
-                    <th><input type="submit" name="register" value="Them sinh vien"></td>
-                </form>
+
 <table style="width:100%">
     <thead>
         <tr>
@@ -22,28 +17,14 @@ table, th, td {
             <th>Lop</th>
             <th>Chuyen nganh</th>
             <th>Tin chi tich luy</th>
-            <th>Sua</th>
-            <th>Xoa</th>
+            <th>Hanh dong</th>
         </tr>
     </thead>
     <tbody>
         <?php
-
-            $item_per_page = !empty((int)filter_input(INPUT_GET, 'perpage'))?(int)filter_input(INPUT_GET, 'perpage'):10;
-            $current_page = (int)filter_input(INPUT_GET, 'page');
-
-            $offset = ($current_page - 1) * $item_per_page;
-
-            
-
-            require_once('../model/database.php');
-            require_once('../model/sinhvien_db.php');
-            //$sinhviens = get_sinhvien_paging($item_per_page, $offset);
-            //count
-            $totalRecords = count_sinhvien();
-            $totalPages = ceil($totalRecords / $item_per_page);
-
-
+            require_once('model/database.php');
+            require_once('model/sinhvien_db.php');
+                    
             $sinhviens = get_all_sinhvien();
             foreach($sinhviens as $sinhvien) :
                 //set bien
@@ -76,20 +57,15 @@ table, th, td {
                 <td><?php echo $tinchitichluy; ?></td>
 
                 <form action="view_update_sv.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
-                    <th><input type="submit" name="edit" value="Edit"></td>
-                    
-                </form>
-                <!--Can sua doan nay-->
-                <form action = "delete_sinhvien.php" method="post" >
-                    <input type="hidden" name="action" value="delete_sv">
-                    <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
-                    <th><input type="submit" name="delete" value="Delete"></td>
-                </form>
+                    <input type="hidden" name="action" value="view_update_sv">
+                    <input type="hidden" name="id" value="<?php echo $sinhvien['user'] ?>">
+                    <td><input type="submit" value="Edit"></td>
+                <form>
+                <td><a href="" class="button">Delete</a></td>
             </tr>
         <?php endforeach; ?>
-        <?php # include '../view/pagination.php'; ?>
     </tbody>
 </table>
-<span class="error"><?php echo $message; ?></span><br>
+<h1><?php echo $thangsinhvien['user'] ?></h1>
+
 <?php include '../view/footer.php'; ?>

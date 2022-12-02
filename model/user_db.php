@@ -11,12 +11,13 @@ function is_valid_taikhoan($taikhoan) {
         $valid = ($statement->rowCount() == 1);
         $statement->closeCursor();
     } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
     }
     return $valid;
 }
-function get_user($taikhoan) { // return class
+/*function get_user($taikhoan) { // return class
     global $db;
     $query = '
         SELECT * FROM "user"
@@ -28,11 +29,11 @@ function get_user($taikhoan) { // return class
     
     $statement->closeCursor();
     return $user;
-}
-function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon) { //void
+}*/
+function add_user($taikhoan, $pass, $is_admin, $is_gv, $is_sv, $is_truongbomon) { //void
     global $db;
     //$user = new User();
-    $password = sha1($taikhoan . $password);  //ham bam
+    $pass_hash = sha1($taikhoan . $pass);  //ham bam
 
     $query = '
         INSERT INTO "user"
@@ -41,7 +42,7 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':taikhoan', $taikhoan);
-        $statement->bindValue(':password', $password);
+        $statement->bindValue(':password', $pass_hash);
         $statement->bindValue(':is_admin', $is_admin);
         $statement->bindValue(':is_gv', $is_gv);
         $statement->bindValue(':is_sv', $is_sv);
@@ -56,55 +57,45 @@ function add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbom
     }
 
 }
-
-function get_one_user($tk) {
+function update_priveledge($taikhoan, $is_admin, $istruongbomon) {
     global $db;
+    
     $query = '
-    SELECT * FROM "user" WHERE taikhoan= :tk';
+    update "user" set is_admin = :is_admin, is_truongbomon = :istruongbomon where taikhoan = :taikhoan';
     
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':tk', $tk);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->bindValue(':is_admin', $is_admin);
+        $statement->bindValue(':istruongbomon', $istruongbomon);
         $statement->execute();
-        $result = $statement->fetch();
         $statement->closeCursor();
-        
+        return true;
     } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
-        return null;
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
     }
-    return $result;
 }
-
-function delete_user($taikhoan){
+function change_password($taikhoan, $pass) {
     global $db;
+
+    $pass_hash = sha1($taikhoan . $pass);  //ham bam
+
     $query = '
-    DELETE FROM "user" WHERE taikhoan = :taikhoan';
+    update "user" set pass = :pass where taikhoan = :taikhoan';
+    
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->bindValue(':pass', $pass);
         $statement->execute();
         $statement->closeCursor();
+        return true;
     } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
-    } 
-}
-
-function update_user($taikhoan, $password){
-    global $db;
-    $password = sha1($taikhoan . $password);
-    $query = 'UPDATE "user" SET pass = :mk where "user".taikhoan = :tk';
-    try {
-        $statement = $db->prepare($query);
-        $statement->bindValue(':tk', $taikhoan);
-        $statement->bindValue(':mk', $password);
-        $statement->execute();
-        $statement->closeCursor();
-    } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
-    } 
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
+    }
 }
 ?>
