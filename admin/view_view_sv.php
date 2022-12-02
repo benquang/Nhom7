@@ -6,7 +6,10 @@ table, th, td {
   border:1px solid black;
 }
 </style>
-
+<form action = "." method="post" >
+                    <input type="hidden" name="action" value="register_sv">
+                    <th><input type="submit" name="register" value="Them sinh vien"></td>
+                </form>
 <table style="width:100%">
     <thead>
         <tr>

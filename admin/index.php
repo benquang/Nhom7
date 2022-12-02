@@ -20,6 +20,10 @@ if ($action == NULL) {
 
 switch ($action) {
 
+    case 'view_gv':
+        include 'admin/view_view_gv.php';
+        break;
+
     case 'view_sv':
         include 'admin/view_view_sv.php';
         break;
