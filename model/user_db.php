@@ -97,7 +97,7 @@ function update_user($taikhoan, $password){
     $password = sha1($taikhoan . $password);
     $query = 'UPDATE "user" SET pass = :mk where "user".taikhoan = :tk';
     try {
-        $statement = $db->query($query);
+        $statement = $db->prepare($query);
         $statement->bindValue(':tk', $taikhoan);
         $statement->bindValue(':mk', $password);
         $statement->execute();

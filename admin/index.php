@@ -20,6 +20,32 @@ if ($action == NULL) {
 
 switch ($action) {
 
+    case 'delete_sv':
+        $taikhoan = filter_input(INPUT_POST, 'id');
+        require_once('../model/database.php');
+        require_once('../model/sinhvien_db.php');
+        require_once('../model/user_db.php');
+        delete_sinhvien($taikhoan);
+        delete_user($taikhoan);
+        $message = 'Xoa thanh cong sinh vien';
+        include '../admin/view_view_sv.php';
+        break;
+
+    case 'delete_gv':
+        $taikhoan = filter_input(INPUT_POST, 'id');
+        require_once('../model/database.php');
+        require_once('../model/giangvien_db.php');
+        require_once('../model/user_db.php');
+        delete_giangvien($taikhoan);
+        delete_user($taikhoan);
+        $message = 'Xoa thanh cong giang vien';
+        include '../admin/view_view_gv.php';
+        break;
+
+    case 'view_gv':
+        include 'admin/view_view_gv.php';
+        break;
+
     case 'view_sv':
         include 'admin/view_view_sv.php';
         break;
@@ -56,6 +82,8 @@ switch ($action) {
             if (add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon)) {
                 if (add_sinhvien($taikhoan, $hovaten, $ngaysinh, $gioitinh, $doituong, $ctdt, $lop, $chuyennganh, $tinchitichluy)) {
                     $message = 'Dang ky thanh cong';
+                    include 'admin/view_view_sv.php';
+                    break;
                 } else {
                     $message = 'add sinh vien khong thanh cong';
                     include 'admin/view_register_sv.php';
@@ -107,6 +135,8 @@ switch ($action) {
             if (add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon)) {
                 if (add_giangvien($taikhoan, $hovaten, $cdkh, $chuyennganh, $chucvu)) {
                     $message = 'Dang ky thanh cong';
+                    include 'admin/view_view_gv.php';
+                    break;
                 } else {
                     $message = 'add giang vien khong thanh cong';
                     include 'admin/view_register_gv.php';
@@ -138,13 +168,21 @@ switch ($action) {
             $chuyennganh = filter_input(INPUT_POST, 'chuyennganh');
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
-            
+            if (update_user($taikhoan, $sinhvien)) {
                 if (update_sinhvien($taikhoan, $hovaten, $ngaysinh, $gioitinh, $doituong, $ctdt, $lop, $chuyennganh, $tinchitichluy)) {
                     $message = 'Update thanh cong';
                     include 'admin/view_view_sv.php';
                     break;
+                } else {
+                    $message = 'Update sinh vien khongthanh cong';
+                    include 'admin/view_view_sv.php';
+                    break;
                 }
-                
+            } else {
+                $message = 'Update user khongthanh cong';
+                include 'admin/view_view_sv.php';
+                break;
+            }
         }
 
         include 'admin/view_register_gv.php';

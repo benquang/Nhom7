@@ -70,12 +70,13 @@ function get_all_sinhvien()
         $statement->execute();
         $result = $statement->fetchAll();
         $statement->closeCursor();
-        return $result;
+        
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
         return null;
     }
+    return $result;
 }
 
 function get_one_sinhvien($taikhoan)
