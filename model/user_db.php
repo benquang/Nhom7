@@ -98,4 +98,22 @@ function change_password($taikhoan, $pass) {
         return false;
     }
 }
+function delete_user($taikhoan){
+    global $db;
+    $query = '
+    DELETE FROM "user" WHERE taikhoan = :taikhoan';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+
+    } catch (PDOException $e) {
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
+
+    } 
+}
 ?>

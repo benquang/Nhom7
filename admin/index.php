@@ -138,6 +138,26 @@ switch ($action) {
 
         include 'admin/view_update_gv.php';
         break;
+    case 'delete_gv':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $taikhoan = filter_input(INPUT_POST, 'taikhoan');
+
+            if (delete_giangvien($taikhoan)){
+                if (delete_user($taikhoan)){
+                    include 'admin/view_register_gv.php';
+                    break;
+                }
+            } else {
+                $message = 'Xóa không thành công !';
+                include 'admin/view_update_gv.php';
+                break;
+            }
+
+        }
+
+        include 'admin/view_update_sv.php';
+        break;
         
     case 'register_sv':
         if ($action == filter_input(INPUT_POST, 'action')) {
@@ -210,6 +230,26 @@ switch ($action) {
                 break;
             } else {
                 $message = 'Update không thành công !';
+                include 'admin/view_update_sv.php';
+                break;
+            }
+
+        }
+
+        include 'admin/view_update_sv.php';
+        break;
+    case 'delete_sv':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $taikhoan = filter_input(INPUT_POST, 'taikhoan');
+
+            if (delete_sinhvien($taikhoan)){
+                if (delete_user($taikhoan)){
+                    include 'admin/view_register_sv.php';
+                    break;
+                }
+            } else {
+                $message = 'Xóa không thành công !';
                 include 'admin/view_update_sv.php';
                 break;
             }

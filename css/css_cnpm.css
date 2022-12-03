@@ -362,4 +362,26 @@ a {
     width: 20%;
     margin-top: 20px;
 }
-
+.shop3 {
+    overflow: auto;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+.shop4 {
+    margin-left: 20px;
+    width: 230px;
+    line-height: 44px;
+    border: 0px solid gray;
+    color: #202020;
+}
+.no-outline:focus {
+    outline: none;
+}
+.shop5 {
+    width: 35px;
+    height: 35px;
+    border: none;
+    margin-top: 5px;
+    margin-right: 10px;
+    float: right;
+}

@@ -125,10 +125,14 @@
  </div>
 </div>
  <div class="addgv" style="width:1320px;margin-top:10px">
-    <div class="bang">
+    <div class="bang" style="margin-top:10px">
       <div class="bang1">
         <div class="bang_title">List sinh vien</div>
-
+        <form action="." method="get" class="shop3" style="float:right;">
+          <input type="hidden" name="action" value="register_sv">
+          <input type="text" name="tukhoa" class="shop4 no-outline" placeholder="Nhap tu khoa">
+          <input type="image" src="<?php echo $app_path ?>img/search_icon2.png" alt="Submit" class="shop5" value="">
+        </form>
       </div>
       <div class="bang_tencot">
         <div class="bang_tencot_1" style="width: 20%;">Tài khoản</div>

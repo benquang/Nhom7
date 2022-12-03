@@ -39,6 +39,25 @@ function get_all_giangvien() {
         return null;
     }
 }
+function get_giangviens_by_search($tukhoa) {
+    global $db;
+    $query = '
+    select * from giangvien join "user" on giangvien."user" = "user".taikhoan where taikhoan = \'%:tukhoa%\' ' ;
+    
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tukhoa', $tukhoa);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 function get_one_giangvien($taikhoan) {
     global $db;
     $query = '
@@ -78,6 +97,25 @@ function update_giangvien($taikhoan, $hovaten, $cdkh, $chuyennganh, $chucvu) {
         //$error_message = $e->getMessage();
         //display_db_error($error_message);
         return false;
+    }
+}
+function delete_giangvien($taikhoan)
+{
+    global $db;
+    $query = '
+    DELETE FROM "giangvien" WHERE "user" = :taikhoan';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+
+    } catch (PDOException $e) {
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
+        return false;
+
     }
 }
 

@@ -155,9 +155,15 @@
         <div class="addgv_hangcuoi">
               <div class="addgv_message"><?php echo $message; ?></div>
               <input type="submit" value="Update" class="addgv_button">
+        </form>
+
+              <form action="." method="post">
+                <input type="hidden" name="action" value="delete_sv">
+                <input type="hidden" name="taikhoan" value="<?php echo $sinhvien['user']; ?>">
+                <input type="submit" value="Delete" class="addgv_button" style="background-color: #d73d32">
+              </form>
         </div>
 
-    </form>
  </div>
 </div>
 <?php include '../view/footer.php'; ?>

@@ -91,4 +91,23 @@ function update_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,
         return false;
     }
 }
+function delete_sinhvien($taikhoan)
+{
+    global $db;
+    $query = '
+    DELETE FROM "sinhvien" WHERE "user" = :taikhoan';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return false;
+
+    }
+}
 ?>
