@@ -4,18 +4,30 @@
 * Nguyễn Khoa Quang Thắng - 20133090
 * Trần Văn Kiệt - 20110650
 * Nguyễn Trí Dũng - 20133029
-#### Yêu cầu bài tập nhóm:
+## Yêu cầu
+- PHP 7 trở lên.
 
-* Nhóm phải quay phim lại ít nhất 1 lần nhóm có thảo luận về bài tập (các thành viên phải bật camera) trên trang học online: https://workon.space/room/6364dd748c6c331b5fa33413
+## Cài đặt
+Cài đặt PHP: https://www.php.net/downloads.php
 
-* Nhóm nộp lại link tài liệu Product Backlog
+Download Xampp: https://www.apachefriends.org/download.html
 
-* Nhóm nộp lại link tài liệu Sprint Backlog (chọn thực hiện trong 7 ngày)
+Cấu hình php.ini của Xammp (gỡ comment ";" trong file php.ini):
+```
+extension = pdo_pgsql
+extension = pgsql
+```
+## Cấu hình
+Download toàn bộ source code: 
+https://github.com/benquang/Nhom7/main
 
-* Nhóm nộp lại link ghi nhận Daily Scrum Meeting (phải có đủ các thành viên và phải làm trong 7 ngày)
+Truy cập thư mục Xampp,vào htdocs, tạo thư mục "nhom7" rồi di chuyển toàn bộ souce code vào hoặc git clone
 
-* Nhóm nộp lại link kết quả thực hiện (gihub + Readme)
+## Cấu trúc app
+Các webapp:
+- `nhom7`/admin
+- `nhom7`/giangvien
+- ...
 
-* Nhóm quay phim demo kết quả làm được
-
-##### Mỗi nhóm cử 1 bạn đại diện nộp 2 link video, 1 link gihub, 3 link document vào phần nộp bài
+## Triển khai
+Mở Xammp, start module apache, vào trình duyệt bất kỳ: truy cập http://localhost/nhom7/
