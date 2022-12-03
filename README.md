@@ -1,5 +1,5 @@
 ## Công Nghệ Phần Mềm
-### Nhóm 15
+### Nhóm 7
 #### Thành viên nhóm:
 * Nguyễn Khoa Quang Thắng - 20133090
 * Trần Văn Kiệt - 20110650
