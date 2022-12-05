@@ -17,19 +17,30 @@ function is_valid_taikhoan($taikhoan) {
     }
     return $valid;
 }
-/*function get_user($taikhoan) { // return class
+function check_taikhoan_pass($taikhoan,$pass) { // return class
     global $db;
     $query = '
         SELECT * FROM "user"
-        WHERE taikhoan = :taikhoan';
-    $statement = $db->prepare($query);
-    $statement->bindValue(':taikhoan', $taikhoan);
-    $statement->execute();
-    $user = $statement->fetch();
-    
-    $statement->closeCursor();
-    return $user;
-}*/
+        WHERE taikhoan = :taikhoan and pass = :pass';
+    try
+    {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->bindValue(':pass', $pass);
+        $statement->execute();
+        $user = $statement->fetch();
+        $statement->closeCursor();
+        return $user;
+    }
+    catch (PDOException $e)
+    {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+
+
+}
 function add_user($taikhoan, $pass, $is_admin, $is_gv, $is_sv, $is_truongbomon) { //void
     global $db;
     //$user = new User();
@@ -80,7 +91,7 @@ function update_priveledge($taikhoan, $is_admin, $istruongbomon) {
 function change_password($taikhoan, $pass) {
     global $db;
 
-    $pass_hash = sha1($taikhoan . $pass);  //ham bam
+    //$pass_hash = sha1($taikhoan . $pass);  //ham bam
 
     $query = '
     update "user" set pass = :pass where taikhoan = :taikhoan';
