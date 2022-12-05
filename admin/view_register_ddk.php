@@ -21,7 +21,7 @@ if (!isset($message)) {
 
 ?>
 <main>
-    <h1>Dot dang ly</h1>
+    <h1>Dot dang ky</h1>
     <form action="." method="post">
 
         <h2>Thoi gian dang ky</h2>
@@ -66,7 +66,20 @@ if (!isset($message)) {
         </select>
         
         <label>Nien khoa:</label>
+        <input type="text" name="nienkhoa" value="<?php echo $nienkhoa; ?>" size="30">
 
+        <h2>Doi tuong dang ky</h2>
+        <?php 
+            require_once('../model/database.php');
+            require_once('../model/doituong_db.php');
+            $doituongs = get_all_doituong();
+            foreach ($doituongs as $doituong):
+                $dt = $doituong['doituong'];
+
+        ?>
+        <input type="checkbox" name="doituong" value="<?php echo $dt; ?>">
+        <label for="doituong"><?php echo $dt ?></label>
+        <?php endforeach; ?><br>
 
         <form action="." method="post">
             <input type="hidden" name="action" value="register_ddk">
