@@ -40,13 +40,17 @@ function get_all_giangvien() {
     }
 }
 function get_giangviens_by_search($tukhoa) {
+    $tukhoa1 = '%' . $tukhoa . '%';
+
     global $db;
     $query = '
-    select * from giangvien join "user" on giangvien."user" = "user".taikhoan where taikhoan = \'%:tukhoa%\' ' ;
+    select * from giangvien join "user" on giangvien."user" = "user".taikhoan 
+    where taikhoan like :tukhoa1 or hovaten like :tukhoa2';
     
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':tukhoa', $tukhoa);
+        $statement->bindValue(':tukhoa1', $tukhoa1);
+        $statement->bindValue(':tukhoa2', $tukhoa1);
 
         $statement->execute();
         $result = $statement->fetchAll();
