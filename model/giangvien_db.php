@@ -34,8 +34,8 @@ function get_all_giangvien() {
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
         return null;
     }
 }
@@ -71,8 +71,8 @@ function get_one_giangvien($taikhoan) {
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
         return null;
     }
 }
@@ -92,11 +92,11 @@ function update_giangvien($taikhoan, $hovaten, $cdkh, $chuyennganh, $chucvu) {
 
         $statement->execute();
         $statement->closeCursor();
-        return true;
+        //return true;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
-        return false;
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
     }
 }
 function delete_giangvien($taikhoan)
@@ -109,13 +109,12 @@ function delete_giangvien($taikhoan)
         $statement->bindValue(':taikhoan', $taikhoan);
         $statement->execute();
         $statement->closeCursor();
-        return true;
+        //return true;
 
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
-        return false;
-
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
     }
 }
 

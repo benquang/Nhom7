@@ -2,8 +2,7 @@
 <?php   
     require_once('model/database.php');
     require_once('model/chuyennganh_db.php');
-
-    if (!isset($message)) { $message = ''; } 
+    require_once('model/giangvien_db.php');
 
     $admin_url = $app_path . 'admin';
 ?>
@@ -21,14 +20,6 @@
     <form action="." method="post">
         <input type="hidden" name="action" value="update_gv">
         <?php 
-                require_once('model/database.php');
-                require_once('model/giangvien_db.php');
-
-                $user = filter_input(INPUT_GET, 'user'); 
-                if ($user == NULL) {
-                  $user = filter_input(INPUT_POST, 'taikhoan');
-                }         
-                $giangvien = get_one_giangvien($user); 
         ?> 
         <div class="addgv_title">Cập nhật thông tin giảng viên</div>
         <div class="adgv2">
@@ -93,7 +84,7 @@
             </div>
         </div>
         <div class="addgv_hangcuoi">
-              <div class="addgv_message"><?php echo $message; ?></div>
+              <div class="addgv_message"></div>
               <input type="submit" value="Update" class="addgv_button">
         </form>
             <form action="." method="post">

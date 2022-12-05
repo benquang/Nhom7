@@ -21,8 +21,8 @@ function add_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lo
         $statement->closeCursor();
         return true;
     } catch (PDOException $e) {
-        $error_message = $e->getMessage();
-        display_db_error($error_message);
+        //$error_message = $e->getMessage();
+        //display_db_error($error_message);
         return false;
     }
 }
@@ -57,8 +57,8 @@ function get_one_sinhvien($taikhoan) {
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
         return null;
     }
 }
@@ -101,12 +101,12 @@ function delete_sinhvien($taikhoan)
         $statement->bindValue(':taikhoan', $taikhoan);
         $statement->execute();
         $statement->closeCursor();
-        return true;
+        //return true;
 
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);
-        return false;
+        //return false;
 
     }
 }

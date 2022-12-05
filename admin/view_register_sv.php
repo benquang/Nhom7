@@ -2,14 +2,16 @@
 <?php   
     require_once('model/database.php');
     require_once('model/chuyennganh_db.php');
+    require_once('model/doituong_db.php');
+    require_once('model/ctdt_db.php');
+    require_once('model/sinhvien_db.php');
+
     if (!isset($taikhoan)) { $taikhoan = ''; } 
     if (!isset($pass)) { $pass = ''; } 
     if (!isset($hovaten)) { $hovaten = ''; } 
     if (!isset($ngaysinh)) { $ngaysinh = ''; } 
     if (!isset($lop)) { $lop = ''; } 
     if (!isset($tinchitichluy)) { $tinchitichluy = ''; } 
-
-    if (!isset($message)) { $message = ''; } 
 
     $admin_url = $app_path . 'admin';
     $view_update_sv_url = $admin_url . '?action=update_sv';
@@ -59,8 +61,6 @@
                 <div class="addgv_tb1" >Đối tượng</div>
                 <select name="doituong" style="height: 36px;font-size: 17px;">
                  <?php
-                  require_once('model/database.php');
-                  require_once('model/doituong_db.php');
 
                   $doituongs = get_all_doituong();
                   foreach ($doituongs as $doituong) :
@@ -75,13 +75,10 @@
             <div class="addgv_tb" style="width: 25%;">
                 <div class="addgv_tb1">Chương trình đào tạo</div>
                 <select name="ctdt" style="height: 36px;font-size: 17px;">
-                <?php
-                 require_once('model/database.php');
-                  require_once('model/ctdt_db.php');
-
+                <?php              
                   $ctdts = get_all_ctdt();
-                 foreach ($ctdts as $ctdt) :
-                 $name = $ctdt['ctdt'];
+                  foreach ($ctdts as $ctdt) :
+                    $name = $ctdt['ctdt'];
                   ?>
                 <option value="<?php echo $name; ?>">
                     <?php echo $name; ?>
@@ -117,8 +114,8 @@
             </div>
 
         <div class="addgv_hangcuoi">
-              <div class="addgv_message"><?php echo $message; ?></div>
-              <input type="submit" value="Add" class="addgv_button">
+            <div class="addgv_message"><?php echo $_SESSION['message']; ?></div>
+            <input type="submit" value="Add" class="addgv_button">
         </div>
 
     </form>
@@ -130,7 +127,7 @@
         <div class="bang_title">List sinh vien</div>
         <form action="." method="get" class="shop3" style="float:right;">
           <input type="hidden" name="action" value="register_sv">
-          <input type="text" name="tukhoa" class="shop4 no-outline" placeholder="Nhap tu khoa">
+          <input type="text" name="tukhoa" class="shop4 no-outline" placeholder="Nhap tu khoa" style="font-size:17px">
           <input type="image" src="<?php echo $app_path ?>img/search_icon2.png" alt="Submit" class="shop5" value="">
         </form>
       </div>
@@ -147,10 +144,7 @@
 
 
       </div>
-      <?php
-                require_once('model/database.php');
-                require_once('model/giangvien_db.php');
-            
+      <?php            
                 $sinhviens = get_all_sinhvien();
                 for ($i = 0; $i < count($sinhviens); $i++):
                   $view_one_sv_url = $view_update_sv_url . '&user=' . $sinhviens[$i]['user'];

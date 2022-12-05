@@ -2,6 +2,10 @@
 <?php   
     require_once('model/database.php');
     require_once('model/chuyennganh_db.php');
+    require_once('model/doituong_db.php');
+    require_once('model/ctdt_db.php');
+
+
     if (!isset($taikhoan)) { $taikhoan = ''; } 
     if (!isset($pass)) { $pass = ''; } 
     if (!isset($hovaten)) { $hovaten = ''; } 
@@ -28,14 +32,6 @@
     <form action="." method="post">
         <input type="hidden" name="action" value="update_sv">
         <?php 
-                require_once('model/database.php');
-                require_once('model/giangvien_db.php');
-
-                $user = filter_input(INPUT_GET, 'user'); 
-                if ($user == NULL) {
-                  $user = filter_input(INPUT_POST, 'taikhoan');
-                }         
-                $sinhvien = get_one_sinhvien($user); 
         ?> 
         <div class="addgv_title">Cập nhật thông tin sinh viên</div>
         <div class="adgv2">
@@ -76,9 +72,6 @@
                 <div class="addgv_tb1" >Đối tượng</div>
                 <select name="doituong" style="height: 36px;font-size: 17px;">
                  <?php
-                  require_once('model/database.php');
-                  require_once('model/doituong_db.php');
-
                   $doituongs = get_all_doituong();
                   foreach ($doituongs as $doituong) :
                     $name = $doituong['doituong'];
@@ -100,9 +93,6 @@
                 <div class="addgv_tb1">Chương trình đào tạo</div>
                 <select name="ctdt" style="height: 36px;font-size: 17px;">
                 <?php
-                 require_once('model/database.php');
-                  require_once('model/ctdt_db.php');
-
                   $ctdts = get_all_ctdt();
                  foreach ($ctdts as $ctdt) :
                  $name = $ctdt['ctdt'];

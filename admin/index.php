@@ -50,23 +50,22 @@ switch ($action) {
             $cdkh = filter_input(INPUT_POST, 'cdkh');
             $chuyennganh = filter_input(INPUT_POST, 'chuyennganh');
             $chucvu = filter_input(INPUT_POST, 'chucvu');
-            $message = '';
 
             //user phai unique
             if (is_valid_taikhoan($taikhoan)) {
-                $message = 'Tài khoản đã tồn tại *';
+                $_SESSION['message'] = 'Tài khoản đã tồn tại *';
                 include 'admin/view_register_gv.php';
                 break;
             }
             //password not empty
             if ($pass == ''){
-                $message = 'Password không được rỗng *';
+                $_SESSION['message'] = 'Password không được rỗng *';
                 include 'admin/view_register_gv.php';
                 break;
             }
             //hovaten not empty
             if ($hovaten == ''){
-                $message = 'Họ và tên không được rỗng *';
+                $_SESSION['message'] = 'Họ và tên không được rỗng *';
                 include 'admin/view_register_gv.php';
                 break;
             }
@@ -74,19 +73,19 @@ switch ($action) {
             //add user rồi tới giảng viên
             if(add_user($taikhoan,$pass,$is_admin,$is_gv,$is_sv,$is_truongbomon)) {
                 if(add_giangvien($taikhoan,$hovaten,$cdkh,$chuyennganh,$chucvu)){
-                    $message = 'Thêm thành công !';
+                    $_SESSION['message'] = 'Thêm thành công !';
+                    include 'admin/view_register_gv.php';
+                    break;
                 } else {
-                    $message = 'Thêm giảng viên không thành công *';
+                    $_SESSION['message'] = 'Thêm giảng viên không thành công *';
                     include 'admin/view_register_gv.php';
                     break;
                 }
             }else {
-                $message = 'Thêm không thành công *';
+                $_SESSION['message'] = 'Thêm không thành công *';
                 include 'admin/view_register_gv.php';
                 break;
             }
-
-
         }
         include 'admin/view_register_gv.php';
         break;
@@ -118,23 +117,16 @@ switch ($action) {
             $chucvu = filter_input(INPUT_POST, 'chucvu');
 
             //đổi thông tin
-            if (update_priveledge($taikhoan,$is_admin,$is_truongbomon)) {
-                if(update_giangvien($taikhoan,$hovaten,$cdkh,$chuyennganh,$chucvu)){
-                    $message = 'Cập nhật thành công !';
-                    include 'admin/view_update_gv.php';
-                    break;
-                } else {
-                    $message = 'Cập nhật thất bại !';
-                    include 'admin/view_update_gv.php';
-                    break;
-                }
-            } else {
-                $message = 'Sửa quyền thất bại !';
-                include 'admin/view_update_gv.php';
-                break;
-            }
+            update_priveledge($taikhoan,$is_admin,$is_truongbomon);
+            update_giangvien($taikhoan,$hovaten,$cdkh,$chuyennganh,$chucvu);
+
+            //neu update thanh cong
+            redirect($app_path . 'admin/?action=register_gv');
 
         }
+        
+        $user = filter_input(INPUT_GET, 'user');        
+        $giangvien = get_one_giangvien($user); 
 
         include 'admin/view_update_gv.php';
         break;
@@ -143,17 +135,11 @@ switch ($action) {
             //user
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
 
-            if (delete_giangvien($taikhoan)){
-                if (delete_user($taikhoan)){
-                    include 'admin/view_register_gv.php';
-                    break;
-                }
-            } else {
-                $message = 'Xóa không thành công !';
-                include 'admin/view_update_gv.php';
-                break;
-            }
+            delete_giangvien($taikhoan);
+            delete_user($taikhoan);
 
+            //neu update thanh cong
+            redirect($app_path . 'admin/?action=register_gv');
         }
 
         include 'admin/view_update_sv.php';
@@ -169,8 +155,6 @@ switch ($action) {
             $is_sv = 'true';
             $is_truongbomon = 'false';
 
-
-
             //ttsinhvien
             $hovaten = filter_input(INPUT_POST, 'hovaten');
             $ngaysinh = filter_input(INPUT_POST, 'ngaysinh');
@@ -182,24 +166,23 @@ switch ($action) {
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
             if (is_valid_taikhoan($taikhoan)) {
-                $message = 'Tai khoan da ton tai';
+                $_SESSION['message'] = 'Tai khoan da ton tai';
                 include 'admin/view_register_sv.php';
                 break;
             }
 
-
             if (add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon)) {
                 if (add_sinhvien($taikhoan, $hovaten, $ngaysinh, $gioitinh, $doituong, $ctdt, $lop, $chuyennganh, $tinchitichluy)) {
-                    $message = 'Dang ky thanh cong';
+                    $_SESSION['message'] = 'Dang ky thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 } else {
-                    $message = 'add sinh vien khong thanh cong';
+                    $_SESSION['message'] = 'add sinh vien khong thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 }
             } else {
-                $message = 'add user khong thanh cong';
+                $_SESSION['message'] = 'add user khong thanh cong';
                 include 'admin/view_register_sv.php';
                 break;
             }
@@ -212,7 +195,6 @@ switch ($action) {
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
             //$pass = filter_input(INPUT_POST, 'pass');     
 
-
             //lấy para từ post
             $hovaten = filter_input(INPUT_POST, 'hovaten');
             $ngaysinh = filter_input(INPUT_POST, 'ngaysinh');
@@ -224,17 +206,14 @@ switch ($action) {
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
             //đổi thông tin
-            if (update_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy)) {
-                $message = 'Update thành công';
-                include 'admin/view_update_sv.php';
-                break;
-            } else {
-                $message = 'Update không thành công !';
-                include 'admin/view_update_sv.php';
-                break;
-            }
-
+            update_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy);
+            
+            //update thanh cong
+            redirect($app_path . 'admin/?action=register_sv');
         }
+
+        $user = filter_input(INPUT_GET, 'user');         
+        $sinhvien = get_one_sinhvien($user); 
 
         include 'admin/view_update_sv.php';
         break;
@@ -243,17 +222,11 @@ switch ($action) {
             //user
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
 
-            if (delete_sinhvien($taikhoan)){
-                if (delete_user($taikhoan)){
-                    include 'admin/view_register_sv.php';
-                    break;
-                }
-            } else {
-                $message = 'Xóa không thành công !';
-                include 'admin/view_update_sv.php';
-                break;
-            }
+            delete_sinhvien($taikhoan);
+            delete_user($taikhoan);
 
+            //update thanh cong
+            redirect($app_path . 'admin/?action=register_sv');
         }
 
         include 'admin/view_update_sv.php';

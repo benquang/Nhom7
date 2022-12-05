@@ -1,14 +1,14 @@
 <?php include '../view/header.php'; ?>
 <?php   
     require_once('model/database.php');
+    require_once('model/giangvien_db.php');
     require_once('model/chuyennganh_db.php');
+    
     if (!isset($taikhoan)) { $taikhoan = ''; } 
     if (!isset($pass)) { $pass = ''; } 
     if (!isset($hovaten)) { $hovaten = ''; } 
     if (!isset($cdkh)) { $cdkh = ''; } 
     if (!isset($chucvu)) { $chucvu = ''; } 
-
-    if (!isset($message)) { $message = ''; } 
 
     $admin_url = $app_path . 'admin';
     $view_update_gv_url = $admin_url . '?action=update_gv';
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="addgv_hangcuoi">
-              <div class="addgv_message"><?php echo $message; ?></div>
+              <div class="addgv_message"><?php echo $_SESSION['message']; ?></div>
               <input type="submit" value="Add" class="addgv_button">
         </div>
 
@@ -84,8 +84,8 @@
       <div class="bang1">
         <div class="bang_title">List giang vien</div>
         <form class="shop3" style="float:right;">
-        <input type="hidden" name="action" value="register_gv">
-          <input type="text" class="shop4 no-outline" placeholder="Nhap tu khoa">
+          <input type="hidden" name="action" value="register_gv">
+          <input type="text" class="shop4 no-outline" placeholder="Nhap tu khoa" style="font-size:17px">
           <input type="image" src="<?php echo $app_path ?>img/search_icon2.png" alt="Submit" class="shop5" value="">
         </form>
       </div>
@@ -100,9 +100,6 @@
 
       </div>
       <?php
-                require_once('model/database.php');
-                require_once('model/giangvien_db.php');
-            
                 $giangviens = get_all_giangvien();
                 for ($i = 0; $i < count($giangviens); $i++):
                   $view_one_gv_url = $view_update_gv_url . '&user=' . $giangviens[$i]['user'];

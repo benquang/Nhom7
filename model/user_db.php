@@ -11,9 +11,9 @@ function is_valid_taikhoan($taikhoan) {
         $valid = ($statement->rowCount() == 1);
         $statement->closeCursor();
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
-        return false;
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
     }
     return $valid;
 }
@@ -70,11 +70,11 @@ function update_priveledge($taikhoan, $is_admin, $istruongbomon) {
         $statement->bindValue(':istruongbomon', $istruongbomon);
         $statement->execute();
         $statement->closeCursor();
-        return true;
+        //return true;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
-        return false;
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
     }
 }
 function change_password($taikhoan, $pass) {
@@ -93,8 +93,8 @@ function change_password($taikhoan, $pass) {
         $statement->closeCursor();
         return true;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
         return false;
     }
 }
@@ -107,12 +107,11 @@ function delete_user($taikhoan){
         $statement->bindValue(':taikhoan', $taikhoan);
         $statement->execute();
         $statement->closeCursor();
-        return true;
-
+        //return true;
     } catch (PDOException $e) {
-        //$error_message = $e->getMessage();
-        //display_db_error($error_message);
-        return false;
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
 
     } 
 }

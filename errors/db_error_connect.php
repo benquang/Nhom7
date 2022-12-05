@@ -1,9 +1,12 @@
 <?php include 'view/header.php'; ?>
-<main>
-    <h1>Database Error</h1>
-    <p>An error occurred connecting to the database.</p>
-    <p>The database must be installed as described in appendix A.</p>
-    <p>The database must be running as described in chapter 1.</p>
-    <p>Error message: <?php echo $error_message; ?></p>
-</main>
+
+  <div class="thanhtitle"  style="margin-bottom: 20px;">
+    <div class="thanhtitle1">
+    <a class="thanhtitle2">Database connection error</a>
+    </div>
+    <div class="thanhtitle1">
+      <span class="thanhtitle3"><?php echo $error_message; ?></span>
+    </div>
+  </div>
+  
 <?php include 'view/footer.php'; ?>
