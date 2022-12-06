@@ -23,7 +23,7 @@ switch ($action) {
         include 'admin/home.php';
         break;
     case 'register_gv':
-        if ($action == filter_input(INPUT_POST, 'action')){
+        if ($action == filter_input(INPUT_POST, 'action')){ //POST
             //user
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
             $pass = filter_input(INPUT_POST, 'pass');
@@ -87,6 +87,7 @@ switch ($action) {
                 break;
             }
         }
+        //GET
         include 'admin/view_register_gv.php';
         break;
     case 'update_gv':
@@ -144,7 +145,17 @@ switch ($action) {
 
         include 'admin/view_update_sv.php';
         break;
-        
+    case 'find_gv':  
+        //GET
+        $search = filter_input(INPUT_GET, 'tukhoa');
+        if (!isset($search)) {
+            $search = '';
+        } 
+
+        $giangviens = get_giangviens_by_search($search);
+        include 'admin/view_register_gv.php';
+        break;
+
     case 'register_sv':
         if ($action == filter_input(INPUT_POST, 'action')) {
             //user
@@ -231,6 +242,16 @@ switch ($action) {
 
         include 'admin/view_update_sv.php';
         break;
+    case 'find_sv':  
+            //GET
+            $search = filter_input(INPUT_GET, 'tukhoa');
+            if (!isset($search)) {
+                $search = '';
+            } 
+    
+            $sinhviens = get_sinhviens_by_search($search);
+            include 'admin/view_register_sv.php';
+            break;
     default:
         display_error("Unknown account action: " . $action);
         break;

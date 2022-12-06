@@ -10,7 +10,7 @@
     <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
     </div>
     <div class="thanhtitle1">
-      <span class="thanhtitle3">Admin / Admin</span>
+      <span class="thanhtitle3">Admin / Trang chủ</span>
     </div>
   </div>
 

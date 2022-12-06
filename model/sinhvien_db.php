@@ -43,6 +43,29 @@ function get_all_sinhvien() {
         return null;
     }
 }
+function get_sinhviens_by_search($tukhoa) {
+    $tukhoa1 = '%' . $tukhoa . '%';
+
+    global $db;
+    $query = '
+    select * from sinhvien join "user" on sinhvien."user" = "user".taikhoan 
+    where taikhoan like :tukhoa1 or hovaten like :tukhoa2';
+    
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tukhoa1', $tukhoa1);
+        $statement->bindValue(':tukhoa2', $tukhoa1);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 
 function get_one_sinhvien($taikhoan) {
     global $db;
