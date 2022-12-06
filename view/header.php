@@ -21,6 +21,13 @@
       </div>
       <span class="thanhtrencung4">Quang Thắng</span>
       <span class="thanhtrencung4">Welcome!</span>
+      <?php
+        if ($_SESSION["user"]!= null)
+        {
+          echo '<a class="thanhtrencung4" href="'. $app_path . "/account/?action=logOut" . '">Log out</a>';
+        }
+      ?>
+
     </div>
   </div>
   <div class="bannertruong">

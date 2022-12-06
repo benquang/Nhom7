@@ -7,13 +7,13 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action == NULL) {        
-        $action = 'home';
+        $action = 'homeview.php';
     }
 }
 
 switch ($action) {
     case 'home':
-        include 'admin/home.php';
+        include 'homeview.php';
         break;
     
     case 'login':
@@ -23,8 +23,9 @@ switch ($action) {
             $user = check_taikhoan_pass($taikhoan,$pass);
             if ($user!=null)
             {
-                $_SESSION['user'] = null ;
                 $_SESSION['user'] = $user ;
+                include 'homeview.php';
+                break;
             }
             else $_SESSION['message'] = "Người dùng không tồn tại";
 
@@ -32,6 +33,12 @@ switch ($action) {
         include 'account/login.php';
         break;
     case 'changePass':
+        if ($_SESSION["user"] == null)
+        {
+            include 'account/login.php';
+            break;
+        }
+
         if ($action == filter_input(INPUT_POST, 'action'))
         {
             $taikhoan = $_SESSION["user"]["taikhoan"];
@@ -44,22 +51,18 @@ switch ($action) {
                 include 'account/changePass.php';
                 break;
             }
-            $_SESSION['message'] = "toi day";
             $is_success = change_password($taikhoan,$pass);
-            if ($is_success)
+            if (!$is_success)
             {
-                $_SESSION['message'] = "Thay đổi mật khẩu thành công!";
+                $_SESSION['message'] = "Thay đổi mật khẩu không thành công!";
             }
-            else $_SESSION['message'] = "Thay đổi mật khẩu không thành công!";
+
         }
         include 'account/changePass.php';
         break;
-    case "changeInfor":
-        if ($action == filter_input(INPUT_POST, 'action'))
-        {
-            
-        }
-        include 'account/changePass.php';
+    case "logOut":
+        $_SESSION['user'] = null;
+        include 'homeview.php';
         break;
     
     default:

@@ -8,7 +8,8 @@
 <?php
     if ($_SESSION["message"] !=null)
         print_r($_SESSION["message"]);
-    $_SESSION["message"] = null;
+
+    print_r($_SESSION["user"]);
 ?>
 
 
