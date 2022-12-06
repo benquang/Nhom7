@@ -3,6 +3,9 @@ require_once('../util/main.php');
 require_once('model/user_db.php');
 require_once('model/giangvien_db.php');
 require_once('model/sinhvien_db.php');
+require_once('model/dotdangky_db.php');
+require_once('model/doituong_db.php');
+
 
 //get both get and post 
 $action = filter_input(INPUT_POST, 'action');
@@ -252,6 +255,35 @@ switch ($action) {
             $sinhviens = get_sinhviens_by_search($search);
             include 'admin/view_register_sv.php';
             break;
+
+    case 'register_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            $id = filter_input(INPUT_POST, 'id');
+            $batdau = filter_input(INPUT_POST, 'batdau');
+            $ketthuc = filter_input(INPUT_POST, 'ketthuc');
+
+            $hocky = filter_input(INPUT_POST, 'hocky');
+            $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
+            $loaidetai = filter_input(INPUT_POST, 'loaidetai');
+            //xử lý sau
+            $doituongs = filter_input(INPUT_POST, 'doituongs');
+            $dts = get_all_doituong();
+
+            //add thanh cong
+            add_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaidetai);
+            //var_dump($doituongs);
+            foreach($dts as $dt):
+                $input = (filter_input(INPUT_POST, $dt['doituong']));
+                if (isset($input)){
+                    add_doituong($id, $input);
+                }
+            endforeach; 
+            
+        }
+        include 'admin/view_view_ddk.php';
+        break;
+
     default:
         display_error("Unknown account action: " . $action);
         break;

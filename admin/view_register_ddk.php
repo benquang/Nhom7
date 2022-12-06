@@ -33,7 +33,7 @@ if (!isset($message)) {
         <label>Ngay bat dau:</label>
         <input type="date" name="batdau" value="<?php echo $batdau; ?>" size="30">
 
-        <label>Password:</label>
+        <label>Ngay ket thuc:</label>
         <input type="date" name="ketthuc" value="<?php echo $ketthuc; ?>" size="30">
 
         <h2>Thong tin dot dang ky</h2>
@@ -65,9 +65,6 @@ if (!isset($message)) {
             <?php endforeach; ?>
         </select>
         
-        <label>Nien khoa:</label>
-        <input type="text" name="nienkhoa" value="<?php echo $nienkhoa; ?>" size="30">
-
         <h2>Doi tuong dang ky</h2>
         <?php 
             require_once('../model/database.php');
@@ -77,15 +74,15 @@ if (!isset($message)) {
                 $dt = $doituong['doituong'];
 
         ?>
-        <input type="checkbox" name="doituong" value="<?php echo $dt; ?>">
-        <label for="doituong"><?php echo $dt ?></label>
-        <?php endforeach; ?><br>
-
+        <input type="checkbox" name="<?php echo $dt; ?>" value="<?php echo $dt; ?>">
+        <label for="<?php echo $dt; ?>"><?php echo $dt ?></label>
+        <?php endforeach; ?>
+        <br>
         <form action="." method="post">
             <input type="hidden" name="action" value="register_ddk">
             <th><input type="submit" name="dang ky" value="Dang ky"></td>
         </form>
-
+        <br>
         <form action="." method="post">
             <input type="hidden" name="action" value="view_ddk">
             <th><input type="submit" name="cancel" value="Cancel"></td>

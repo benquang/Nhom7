@@ -20,6 +20,7 @@
             <th>Nien khoa</th>
             <th>Hinh thuc</th>
             <th>Loai de tai</th>
+            <th>Doi tuong dang ky</th>
             <th>Sua</th>
             <th>Xoa</th>
         </tr>
@@ -36,6 +37,7 @@
 
         require_once('../model/database.php');
         require_once('../model/dotdangky_db.php');
+        require_once('../model/doituong_db.php');
         //$sinhviens = get_sinhvien_paging($item_per_page, $offset);
         //count
         //$totalRecords = count_sinhvien();
@@ -52,6 +54,8 @@
             $nienkhoa = $ddk['nienkhoa'];
             $hinhthuc = $ddk['hinhthuc'];
             $loaidetai = $ddk['loaidetai'];
+            $doituong = '';
+            $dts = get_doituong($id);
 
         ?>
             <tr>
@@ -62,6 +66,12 @@
                 <td><?php echo $nienkhoa; ?></td>
                 <td><?php echo $hinhthuc; ?></td>
                 <td><?php echo $loaidetai; ?></td>
+                
+                <?php foreach ($dts as $dt) :
+                    
+                    $doituong = $doituong.' '.$dt['doituong'];
+                endforeach;?>
+                <td><?php echo $doituong; ?></td>
 
                 <form action="view_update_gv.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
