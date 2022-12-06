@@ -283,7 +283,36 @@ switch ($action) {
         }
         include 'admin/view_view_ddk.php';
         break;
+    
+    case 'update_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            $id = filter_input(INPUT_POST, 'id');
+            $batdau = filter_input(INPUT_POST, 'batdau');
+            $ketthuc = filter_input(INPUT_POST, 'ketthuc');
 
+            $hocky = filter_input(INPUT_POST, 'hocky');
+            $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
+            $loaidetai = filter_input(INPUT_POST, 'loaidetai');
+            //xử lý sau
+            $doituongs = filter_input(INPUT_POST, 'doituongs');
+            $dts = get_all_doituong();
+
+            //add thanh cong
+            update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaidetai);
+            delete_doituong($id);
+            //var_dump($doituongs);
+            foreach($dts as $dt):
+                $input = (filter_input(INPUT_POST, $dt['doituong']));
+                if (isset($input)){
+                    add_doituong($id, $input);
+                }
+            endforeach; 
+
+        }
+
+        include 'admin/view_view_ddk.php';
+        break;
     default:
         display_error("Unknown account action: " . $action);
         break;

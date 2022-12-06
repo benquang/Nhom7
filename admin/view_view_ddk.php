@@ -73,15 +73,15 @@
                 endforeach;?>
                 <td><?php echo $doituong; ?></td>
 
-                <form action="view_update_gv.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
+                <form action="view_update_ddk.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <th><input type="submit" name="edit" value="Edit"></td>
 
                 </form>
                 <!--Can sua doan nay-->
                 <form action="." method="post">
-                    <input type="hidden" name="action" value="delete_gv">
-                    <input type="hidden" name="id" value="<?php echo $taikhoan; ?>">
+                    <input type="hidden" name="action" value="delete_ddk">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <th><input type="submit" name="delete" value="Delete"></td>
                 </form>
             </tr>

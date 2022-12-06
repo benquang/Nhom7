@@ -3,7 +3,7 @@ function get_all_doituong()
 {
     global $db;
     $query = '
-        SELECT * FROM doituong';
+        SELECT * FROM doituong ';
 
     try {
         $statement = $db->prepare($query);
@@ -54,5 +54,22 @@ function get_doituong($id)
         $error_message = $e->getMessage();
         display_db_error($error_message);
         return null;
+    }
+}
+
+function delete_doituong($id){
+    global $db;
+    $query = 'DELETE FROM dotdangky_doituong WHERE dotdangky = :id';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':id', $id);
+
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return false;
     }
 }

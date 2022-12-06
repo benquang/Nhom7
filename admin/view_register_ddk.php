@@ -45,8 +45,8 @@ if (!isset($message)) {
 
         <label>Hinh thuc:</label>
         <select name="hinhthuc">
-            <option value="online">Online</option>
-            <option value="offline">Offline</option>
+            <option value="Online">Online</option>
+            <option value="Offline">Offline</option>
         </select>
 
         <label>Loai de tai:</label>
