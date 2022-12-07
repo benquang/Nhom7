@@ -35,7 +35,9 @@
   </div>
   <div class="bannertruong">
     <div class="bannertruong1">
-      <img class="bannertruong_img" src="<?php echo $app_path ?>img/logo-cntt2021(1).png">
+      <a href="<?php echo $app_path ?>" class="bannertruong_img"><img style="margin-top:10px" src="<?php echo $app_path ?>img/logo-cntt2021(1).png"></a>
+      <a href="<?php echo $app_path . 'admin'; ?>" style="float:right;line-height: 80px;margin-left:20px">Admin</a>
       <span class="bannertruong_tentruong">Trường Đại học Sư phạm Kỹ thuật TP. HCM</span>
+
     </div>
   </div>

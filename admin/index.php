@@ -11,6 +11,8 @@ require_once('model/nganhdaotao_db.php');
 require_once('model/chuyennganh_db.php');
 require_once('model/ctdt_db.php');
 require_once('model/doituong_db.php');
+require_once('model/dotdangky_db.php');
+
 
 
 //get both get and post 
@@ -274,6 +276,27 @@ switch ($action) {
         }
         redirect($app_path . 'admin');
         break;
+    case 'update_loaidetai':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+            $ghichu = filter_input(INPUT_POST, 'ghichu');
+
+            update_loaidetai($id,$ghichu);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_loaidetai.php';
+        break;
+    case 'delete_loaidetai':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+
+            delete_loaidetai($id);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_loaidetai.php';
+        break;
     case 'add_nganhdaotao':
         if ($action == filter_input(INPUT_POST, 'action')){
             //user
@@ -285,6 +308,28 @@ switch ($action) {
         }
         redirect($app_path . 'admin');
         break;
+    case 'update_nganhdaotao':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+            $ghichu = filter_input(INPUT_POST, 'ghichu');
+
+            update_loaidetai($id,$ghichu);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_nganhdaotao.php';
+        break;
+    case 'delete_nganhdaotao':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+
+            delete_loaidetai($id);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_nganhdaotao.php';
+        break;
+    //chuyennganh
     case 'add_chuyennganh':
         if ($action == filter_input(INPUT_POST, 'action')){
             //user
@@ -295,6 +340,27 @@ switch ($action) {
 
         }
         redirect($app_path . 'admin');
+        break;
+    case 'update_chuyennganh':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $tenchuyennganh = filter_input(INPUT_POST, 'tenchuyennganh');
+            $mota = filter_input(INPUT_POST, 'mota');
+
+            update_chuyennganh($tenchuyennganh,$mota);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_chuyennganh.php';
+        break;
+    case 'delete_chuyennganh':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $tenchuyennganh = filter_input(INPUT_POST, 'tenchuyennganh');
+
+            delete_chuyennganh($tenchuyennganh);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_loaidetai.php';
         break;
     case 'add_ctdt':
         if ($action == filter_input(INPUT_POST, 'action')){
@@ -307,6 +373,27 @@ switch ($action) {
         }
         redirect($app_path . 'admin');
         break;
+    case 'update_ctdt':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+            $nganhdaotao = filter_input(INPUT_POST, 'nganhdaotao');
+
+            update_ctdt($id,$nganhdaotao);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_ctdt.php';
+        break;
+    case 'delete_ctdt':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+
+            delete_ctdt($id);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_ctdt.php';
+        break;
     case 'add_doituong':
         if ($action == filter_input(INPUT_POST, 'action')){
             //user
@@ -317,6 +404,97 @@ switch ($action) {
 
         }
         redirect($app_path . 'admin');
+        break;
+    case 'update_doituong':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+            $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
+
+            update_doituong($id,$nienkhoa);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_doituong.php';
+        break;
+    case 'delete_doituong':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //user
+            $id = filter_input(INPUT_POST, 'id');
+
+            delete_doituong($id);
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_doituong.php';
+        break;
+    
+    //dotdangky
+    case 'register_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //id tự động
+            $last = last_id_ddk();
+            $id = $last['id'] + 1;
+
+            $batdau = filter_input(INPUT_POST, 'batdau');
+            $ketthuc = filter_input(INPUT_POST, 'ketthuc');
+
+            $hocky = filter_input(INPUT_POST, 'hocky');
+            $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
+            $loaidetai = filter_input(INPUT_POST, 'loaidetai');
+
+            $file = filter_input(INPUT_POST, 'file');
+            $title = filter_input(INPUT_POST, 'title');
+            $status = filter_input(INPUT_POST, 'status');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
+
+            //
+            $doituongs = get_all_doituong();
+
+            //add thanh cong
+            add_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $title, $status, $hinhthuc);
+
+            //var_dump($doituongs);
+            foreach($doituongs as $doituong):
+                $input = filter_input(INPUT_POST, $doituong['doituong']);
+                if (isset($input)){
+                    $input = $doituong['doituong'];
+                    add_ddk_doituong($id, $input);
+                }
+            endforeach;   
+
+            redirect($app_path . 'admin');
+        }
+        include 'admin/view_register_ddk.php';
+        break;
+    
+    case 'update_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            $id = filter_input(INPUT_POST, 'id');
+            $batdau = filter_input(INPUT_POST, 'batdau');
+            $ketthuc = filter_input(INPUT_POST, 'ketthuc');
+
+            $hocky = filter_input(INPUT_POST, 'hocky');
+            $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
+            $loaidetai = filter_input(INPUT_POST, 'loaidetai');
+            //xử lý sau
+            $doituongs = filter_input(INPUT_POST, 'doituongs');
+            $dts = get_all_doituong();
+
+            //add thanh cong
+            update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaidetai);
+            delete_doituong($id);
+            //var_dump($doituongs);
+            foreach($dts as $dt):
+                $input = (filter_input(INPUT_POST, $dt['doituong']));
+                if (isset($input)){
+                    add_doituong($id, $input);
+                }
+            endforeach; 
+
+        }
+
+        include 'admin/temp.php';
         break;
     default:
         display_error("Unknown account action: " . $action);

@@ -16,6 +16,27 @@ function get_all_nganhdaotao() {
         return null;
     }
 }
+function get_one_nganhdaotao($tennganh)
+{
+    global $db;
+    $query = '
+        SELECT * FROM nganhdaotao where tennganh = :tennganh';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tennganh', $tennganh);
+
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+    return $result;
+}
 function add_nganhdaotao($tennganh, $mota) { //void
     global $db;
 
@@ -30,6 +51,44 @@ function add_nganhdaotao($tennganh, $mota) { //void
         $statement->execute();
         $statement->closeCursor();
         //return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+}
+function update_nganhdaotao($tennganh, $mota) {
+    global $db;
+    
+    $query = '
+        update nganhdaotao set mota = :mota where tennganh = :tennganh';
+    
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tennganh', $tennganh);
+        $statement->bindValue(':mota', $mota);
+
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+}
+function delete_nganhdaotao($tennganh)
+{
+    global $db;
+    $query = '
+    DELETE FROM nganhdaotao WHERE tennganh = :tennganh';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':tennganh', $tennganh);
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+
     } catch (PDOException $e) {
         $error_message = $e->getMessage();
         display_db_error($error_message);

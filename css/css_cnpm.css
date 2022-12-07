@@ -408,6 +408,13 @@ a {
     text-align: center;
     font-weight: 700;
     color: #353e4e;
-
     cursor: pointer;
+}
+
+.tx_noneborder{
+    border: 0px none;
+    font-size: 17px;
+    line-height: 50px;
+    color: #0d0d1f;
+    background-color: #f5f5f5;
 }
