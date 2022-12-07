@@ -12,6 +12,6 @@
         print_r($_SESSION["message"]);
         $_SESSION["message"] = null;
     }
-
+    
 ?>
 <?php include '../view/footer.php'; ?>
