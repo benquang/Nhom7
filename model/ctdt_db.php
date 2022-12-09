@@ -16,4 +16,26 @@ function get_all_ctdt() {
         return null;
     }
 }
+
+function get_one_ctdt($ctdt)
+{
+    global $db;
+    $query = '
+        SELECT * FROM chuongtrinhdaotao where ctdt = :ctdt';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':ctdt', $ctdt);
+
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+    return $result;
+}
 ?>

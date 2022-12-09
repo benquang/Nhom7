@@ -17,8 +17,8 @@ $loaidetai = filter_input(INPUT_POST, 'id');
             <th>STT</th>
             <th>Ten de tai</th>
             <th>GVHD</th>
+            <th>GVPB</th>
             <th>Chi tiet</th>
-            <th>Them hoi dong</th>
         </tr>
     </thead>
     <tbody>
@@ -40,27 +40,34 @@ $loaidetai = filter_input(INPUT_POST, 'id');
         //$totalPages = ceil($totalRecords / $item_per_page);
 
         $detais = get_all_detai($loaidetai);
-        $i = 0;
         foreach ($detais as $detai) :
-            $i++;
+            $id = $detai['id'];
             $tendetai = $detai['tendetai'];
             $gvhd = get_one_giangvien($detai['gvhuongdan'])['hovaten'];
+            $gvpb = get_one_giangvien($detai['gvphanbien']);
+
 
 
         ?>
             <tr>
-                <td><?php echo $i; ?></td>
+                <td><?php echo $id; ?></td>
                 <td><?php echo $tendetai; ?></td>
                 <td><?php echo $gvhd; ?></td>
+                <?php if ($gvpb != null) { ?>
+                    <td><?php echo $gvpb['hovaten'] ?></td>
+                <?php } else { ?>
+                    <form action="view_phangvpb.php" method="post">
+                        <!-- truyen id -->
+                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                        <th><input type="submit" name="phancong" value="Phan cong"></td>
+                    </form>
+                <?php } ?>
                 <form action="view_chitietdetai.php" method="post">
                     <!-- truyen id -->
                     <input type="hidden" name="id" value="<?php echo $detai['id'] ?>">
                     <th><input type="submit" name="view" value="Xem chi tiet"></td>
                 </form>
-                <form action="view_themhoidong.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $tendetai; ?>">
-                    <th><input type="submit" name="view" value="Them hoi dong"></td>
-                </form>
+
 
             </tr>
         <?php endforeach; ?>
