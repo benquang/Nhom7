@@ -63,6 +63,18 @@ switch ($action) {
         //$_SESSION['user'] = null;
         //xoa session['user']
         unset($_SESSION['user']);
+        if (isset($_SESSION['admin'])){
+            unset($_SESSION['admin']);
+        }
+        if (isset($_SESSION['gv'])){
+            unset($_SESSION['gv']);
+        }
+        if (isset($_SESSION['tbm'])){
+            unset($_SESSION['tbm']);
+        }
+        if (isset($_SESSION['sv'])){
+            unset($_SESSION['sv']);
+        }
         redirect($app_path);
         break;
 

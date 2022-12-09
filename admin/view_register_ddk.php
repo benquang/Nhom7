@@ -83,8 +83,8 @@
                 foreach ($loaidetais as $loaidetai) :
                     $name = $loaidetai['loaidetai'];
                 ?>
-                    <option value="<?php echo $name; ?>">
-                        <?php echo $name; ?>
+                    <option value="<?php echo htmlspecialchars($name); ?>">
+                        <?php echo htmlspecialchars($name); ?>
                     </option>
                 <?php endforeach; ?>
             </select>

@@ -1,4 +1,42 @@
 <?php
+function is_sv_thuocdoituong($taikhoan, $doituong) {
+    global $db;
+    $query = '
+        select * from sinhvien where "user" = :taikhoan and doituong = :doituong';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->bindValue(':doituong', $doituong);
+
+        $statement->execute();
+        $valid = ($statement->rowCount() == 1);
+        $statement->closeCursor();
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+    return $valid;
+}
+function is_sv_thuocchuyennganh($taikhoan, $chuyennganh) {
+    global $db;
+    $query = '
+        select * from sinhvien where "user" = :taikhoan and chuyennganh = :chuyennganh';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':taikhoan', $taikhoan);
+        $statement->bindValue(':chuyennganh', $chuyennganh);
+
+        $statement->execute();
+        $valid = ($statement->rowCount() == 1);
+        $statement->closeCursor();
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+    return $valid;
+}
 function add_sinhvien($taikhoan,$hovaten,$ngaysinh,$gioitinh,$doituong,$ctdt,$lop,$chuyennganh,$tinchitichluy) { //void
     global $db;
 

@@ -20,11 +20,15 @@
         <span class="thanhtrencung3">Nhóm 19 - Đăng Ký Đề Tài</span>
       </div>
       <?php if(isset($_SESSION['user'])):?>
+        <a  href="<?php echo $app_path ?>?action=register_detai" 
+            class="thanhtrencung4" style="font-weight:700;margin-left: 20px;cursor: pointer;">Đăng ký đề tài</a>
         <a href="<?php echo $app_path ?>account?action=logout" 
             class="thanhtrencung4" style="font-weight:700;margin-left: 20px">Logout</a>
         <span class="thanhtrencung4" style="margin-left:5px"><?php echo $_SESSION['user']; ?></span>
         <span class="thanhtrencung4">Welcome!</span>
       <?php else:?>
+        <a  href="<?php echo $app_path ?>?action=register_detai" 
+            class="thanhtrencung4" style="font-weight:700;margin-left: 20px;cursor: pointer;">Đăng ký đề tài</a>
         <a  href="<?php echo $app_path ?>account" 
             class="thanhtrencung4" style="font-weight:700;margin-left: 20px;cursor: pointer;">Login</a>
         <span class="thanhtrencung4" style="margin-left:5px">Guest</span>

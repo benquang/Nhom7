@@ -432,7 +432,12 @@ switch ($action) {
         if ($action == filter_input(INPUT_POST, 'action')){
             //id tự động
             $last = last_id_ddk();
-            $id = $last['id'] + 1;
+            if ($last == NULL){
+                $id = 100;
+            }
+            else {
+                $id = $last['id'] + 1;
+            }
 
             $batdau = filter_input(INPUT_POST, 'batdau');
             $ketthuc = filter_input(INPUT_POST, 'ketthuc');

@@ -109,7 +109,7 @@
               </div>
               <div class="addgv_tb" style="width: 30%;">
                 <div class="addgv_tb1" >Tín chỉ tích lũy</div>
-                <input type="text" name="tinchitichluy" value="<?php echo $hovaten; ?>" class="addgv_tb2">
+                <input type="text" name="tinchitichluy" value="<?php echo $tinchitichluy; ?>" class="addgv_tb2">
               </div>
 
             </div>

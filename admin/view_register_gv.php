@@ -160,6 +160,7 @@
       <?php endif; ?>
 
       <?php endfor; ?>
+      
       <div class="pagina">
       <?php     if ($num_page == 1): ?>
         <a class="pagina_lui" 
