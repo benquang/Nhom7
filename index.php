@@ -34,6 +34,16 @@ switch ($action) {
         // Display the home page
         include('homeview.php');
         break;
+    case 'profile':
+        if (isset($_SESSION['gv'])){
+            redirect($app_path . 'giangvien?action=profile');
+            break;
+        }
+        if (isset($_SESSION['sv'])){
+            redirect($app_path . 'sinhvien?action=profile');
+            break; 
+        }
+        break;
     case 'view_thongbao':
         include 'view/thongbao.php';
         break;
@@ -53,7 +63,8 @@ switch ($action) {
             break;
         }
         if (isset($_SESSION['sv'])){
-            
+            redirect($app_path . 'sinhvien?action=register_detai');
+            break; 
         }
         break;
     default:

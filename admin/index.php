@@ -1,6 +1,6 @@
 <?php
 require_once('../util/main.php');
-//require_once('../util/valid_admin.php');
+require_once('../util/valid_admin.php');
 
 //model
 require_once('model/user_db.php');
@@ -171,7 +171,7 @@ switch ($action) {
         if ($action == filter_input(INPUT_POST, 'action')) {
             //user
             $taikhoan = filter_input(INPUT_POST, 'taikhoan');
-            $password = filter_input(INPUT_POST, 'password');
+            $password = filter_input(INPUT_POST, 'pass');
             $is_admin = 'false';
             $is_gv = 'false';
             $is_sv = 'true';

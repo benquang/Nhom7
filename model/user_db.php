@@ -99,7 +99,7 @@ function change_password($taikhoan, $pass) {
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':taikhoan', $taikhoan);
-        $statement->bindValue(':pass', $pass);
+        $statement->bindValue(':pass', $pass_hash);
         $statement->execute();
         $statement->closeCursor();
         return true;

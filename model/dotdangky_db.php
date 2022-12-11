@@ -54,6 +54,27 @@ function get_all_ddk_hieuluc_gv()
         return null;
     }
 }
+function get_all_ddk_hieuluc_sv($doituong)
+{
+    global $db;
+    $query = '
+        select * from dotdangky join dotdangky_doituong on dotdangky.id = dotdangky_doituong.dotdangky
+        where batdau <= current_date and ketthuc >= current_date and hinhthuc = \'true\' and status = \'true\'
+        and doituong = :doituong ';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':doituong',$doituong);
+        $statement->execute();
+        $result = $statement->fetch();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 function get_all_phanloaidetai()
 {
     global $db;

@@ -15,6 +15,8 @@
         <div class="bang_tencot_1" style="width: 10%;">CDKH</div>
         <div class="bang_tencot_1" style="width: 20%;">Chuyen nganh</div>
         <div class="bang_tencot_1">Chuc vu</div>
+        /storage/ssd3/167/19987167/public_html
+        /storage/ssd3/167/19987167/public_html
       </div> -->
       <?php
       $dotdangkys = get_all_ddk();

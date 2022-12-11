@@ -17,18 +17,17 @@ function last_id_detai(){
         return null;
     }
 }
-function count_svthuchien_by_detai($detai){
+function get_one_detai_by_sinhvien($sinhvien) {
     global $db;
     $query = '
-        select detai, count(sinhvien) from sinhvienthuchien group by detai having detai = :detai';
-
+      select * from chitietdetai join sinhvienthuchien on chitietdetai.id = sinhvienthuchien.detai 
+      where sinhvien = :sinhvien';
+    
     try {
         $statement = $db->prepare($query);
-        $statement->bindValue(':detai', $detai);
-
+        $statement->bindValue(':sinhvien', $sinhvien);
         $statement->execute();
         $result = $statement->fetch();
-        
         $statement->closeCursor();
         return $result;
     } catch (PDOException $e) {
@@ -70,6 +69,67 @@ function get_all_detai_by_danhmuc($loaidetai, $doituong, $hocky, $nienkhoa){
         $statement->bindValue(':doituong', $doituong);
         $statement->bindValue(':hocky', $hocky);
         $statement->bindValue(':nienkhoa', $nienkhoa);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function get_all_detai_by_dotdangky_cungchuyennganh($dotdangky, $chuyennganh){
+    global $db;
+    $query = '
+        select * from chitietdetai where dotdangky = :dotdangky and chuyennganh = :chuyennganh';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':dotdangky', $dotdangky);
+        $statement->bindValue(':chuyennganh', $chuyennganh);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function get_all_detai_by_dotdangky_khacchuyennganh($dotdangky, $chuyennganh){
+    global $db;
+    $query = '
+        select * from chitietdetai where dotdangky = :dotdangky and dkkhacchuyennganh = \'true\' 
+        and chuyennganh != :chuyennganh';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':dotdangky', $dotdangky);
+        $statement->bindValue(':chuyennganh', $chuyennganh);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function get_all_detai_by_gvhuongdan($gvhuongdan){
+    global $db;
+    $query = '
+        select * from chitietdetai join dotdangky_doituong on chitietdetai.dotdangky = dotdangky_doituong.dotdangky 
+        where gvhuongdan = :gvhuongdan';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':gvhuongdan', $gvhuongdan);
 
         $statement->execute();
         $result = $statement->fetchAll();
@@ -140,6 +200,26 @@ function add_sinhvienthuchien($detai, $taikhoan, $is_truongnhom) { //void
         $statement->bindValue(':detai', $detai);
         $statement->bindValue(':taikhoan', $taikhoan);
         $statement->bindValue(':is_truongnhom', $is_truongnhom);
+
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+}
+function update_gv_phanbien($id, $gvphanbien) { //void
+    global $db;
+
+    $query = '
+        update chitietdetai set gvphanbien = :gvphanbien where id = :id';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':gvphanbien', $gvphanbien);
+        $statement->bindValue(':id', $id);
 
         $statement->execute();
         $statement->closeCursor();

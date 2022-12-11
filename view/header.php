@@ -24,7 +24,8 @@
             class="thanhtrencung4" style="font-weight:700;margin-left: 20px;cursor: pointer;">Đăng ký đề tài</a>
         <a href="<?php echo $app_path ?>account?action=logout" 
             class="thanhtrencung4" style="font-weight:700;margin-left: 20px">Logout</a>
-        <span class="thanhtrencung4" style="margin-left:5px"><?php echo $_SESSION['user']; ?></span>
+        <a href="<?php echo $app_path ?>?action=profile" 
+            class="thanhtrencung4" style="margin-left:5px"><?php echo $_SESSION['user']; ?></a>
         <span class="thanhtrencung4">Welcome!</span>
       <?php else:?>
         <a  href="<?php echo $app_path ?>?action=register_detai" 

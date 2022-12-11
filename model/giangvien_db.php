@@ -22,6 +22,24 @@ function add_giangvien($taikhoan, $hovaten, $cdkh, $chuyennganh, $chucvu) { //
         return false;
     }
 }
+function get_all_giangvien_by_chuyennganh($chuyennganh) {
+    global $db;
+    $query = '
+        select * from giangvien where chuyennganh = :chuyennganh';
+    
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':chuyennganh', $chuyennganh);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 function get_all_giangvien() {
     global $db;
     $query = '

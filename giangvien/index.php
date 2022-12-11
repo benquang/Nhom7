@@ -1,6 +1,6 @@
 <?php
 require_once('../util/main.php');
-//require_once('../util/valid_admin.php');
+require_once('../util/valid_gv.php');
 
 //model
 require_once('model/user_db.php');
@@ -13,6 +13,7 @@ require_once('model/ctdt_db.php');
 require_once('model/doituong_db.php');
 require_once('model/dotdangky_db.php');
 require_once('model/chitietdetai_db.php');
+require_once('model/sinhvienthuchien_db.php');
 
 
 
@@ -34,7 +35,9 @@ switch ($action) {
     case 'home':
         include 'homeview.php';
         break;
-
+    case 'profile':
+        include 'profile.php';
+        break;
     case 'register_detai':
         if ($action == filter_input(INPUT_POST, 'action')){
             //id tự động
