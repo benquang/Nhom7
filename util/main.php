@@ -36,5 +36,5 @@ function redirect($url) {
 // Start session to store user and cart data
 session_start();
 // thong bao moi trang web
-$_SESSION['message'] = '';
+//$_SESSION['message'] = '';
 ?>

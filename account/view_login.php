@@ -1,6 +1,7 @@
 <?php include '../view/header.php'; ?>
 <?php 
     if (!isset($taikhoan)) { $taikhoan = ''; } 
+    if (!isset($message)) { $message = ''; } 
 
     $account_url = $app_path . 'account';
 ?>
@@ -9,7 +10,7 @@
    <a href="<?php echo $account_url; ?>" class="thanhtitle2">Login</a>
  </div>
  <div class="thanhtitle1">
-    <span class="thanhtitle3"><a href="<?php echo $view_regist_gv_url;?>" style="color:#797f89">Tai khoan</a> / Login</span>
+    <span class="thanhtitle3"><a href="<?php echo $view_regist_gv_url;?>" style="color:#797f89">Tài khoản</a> / Login</span>
  </div>
 </div>
 
@@ -32,7 +33,7 @@
             <input type="submit" value="Login" class="addgv_button" style="margin-top:32px">
         </div>
         <div class="addgv_hangcuoi">
-              <div class="addgv_message"><?php echo $_SESSION['message']; ?></div>
+              <div class="addgv_message"><?php echo $message; ?></div>
         </div>
     </form>
  </div>

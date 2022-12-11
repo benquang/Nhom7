@@ -1,9 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/database.php');
-    require_once('model/loaidetai_db.php');
-    require_once('model/dotdangky_db.php');
-    require_once('model/doituong_db.php');
 
     $admin_url = $app_path . 'admin';
 ?>

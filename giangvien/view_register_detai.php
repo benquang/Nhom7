@@ -6,6 +6,8 @@
     if (!isset($yeucau)) { $yeucau = ''; } 
     if (!isset($sanpham)) { $sanpham = ''; } 
     if (!isset($chuthich)) { $chuthich = ''; } 
+    if (!isset($message)) { $message = ''; } 
+
     if (!isset($sv1)) { $sv1 = ''; } 
     if (!isset($sv2)) { $sv2 = ''; } 
 
@@ -128,7 +130,7 @@
         </div>
 
         <div class="addgv_hangcuoi">
-              <div class="addgv_message"><?php echo $_SESSION['message']; ?></div>
+              <div class="addgv_message"><?php echo $message; ?></div>
               <input type="submit" value="Add" class="addgv_button">
         </div>
 

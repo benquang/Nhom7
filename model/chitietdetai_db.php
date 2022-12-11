@@ -80,6 +80,34 @@ function get_all_detai_by_danhmuc($loaidetai, $doituong, $hocky, $nienkhoa){
         return null;
     }
 }
+function get_all_detai_by_danhmuc_chuyennganh($loaidetai, $doituong, $hocky, $nienkhoa, $chuyennganh){
+    global $db;
+    $query = '
+        select chitietdetai.id,tendetai,gvhuongdan from chitietdetai join dotdangky 
+        on chitietdetai.dotdangky = dotdangky.id
+        join dotdangky_doituong
+        on dotdangky.id = dotdangky_doituong.dotdangky
+        where loaidetai = :loaidetai and doituong = :doituong and hocky = :hocky and nienkhoa = :nienkhoa
+        and chuyennganh = :chuyennganh';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':loaidetai', $loaidetai);
+        $statement->bindValue(':doituong', $doituong);
+        $statement->bindValue(':hocky', $hocky);
+        $statement->bindValue(':nienkhoa', $nienkhoa);
+        $statement->bindValue(':chuyennganh', $chuyennganh);
+
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 function get_all_detai_by_dotdangky_cungchuyennganh($dotdangky, $chuyennganh){
     global $db;
     $query = '

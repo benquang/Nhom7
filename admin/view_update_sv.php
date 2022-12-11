@@ -1,9 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/database.php');
-    require_once('model/chuyennganh_db.php');
-    require_once('model/doituong_db.php');
-    require_once('model/ctdt_db.php');
 
 
     if (!isset($taikhoan)) { $taikhoan = ''; } 

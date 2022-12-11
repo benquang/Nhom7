@@ -64,19 +64,19 @@ switch ($action) {
 
             //user phai unique
             if (is_valid_taikhoan($taikhoan)) {
-                $_SESSION['message'] = 'Tài khoản đã tồn tại *';
+                $message = 'Tài khoản đã tồn tại *';
                 include 'admin/view_register_gv.php';
                 break;
             }
             //password not empty
             if ($pass == ''){
-                $_SESSION['message'] = 'Password không được rỗng *';
+                $message = 'Password không được rỗng *';
                 include 'admin/view_register_gv.php';
                 break;
             }
             //hovaten not empty
             if ($hovaten == ''){
-                $_SESSION['message'] = 'Họ và tên không được rỗng *';
+                $message = 'Họ và tên không được rỗng *';
                 include 'admin/view_register_gv.php';
                 break;
             }
@@ -84,16 +84,16 @@ switch ($action) {
             //add user rồi tới giảng viên
             if(add_user($taikhoan,$pass,$is_admin,$is_gv,$is_sv,$is_truongbomon)) {
                 if(add_giangvien($taikhoan,$hovaten,$cdkh,$chuyennganh,$chucvu)){
-                    $_SESSION['message'] = 'Thêm thành công !';
+                    $message = 'Thêm thành công !';
                     include 'admin/view_register_gv.php';
                     break;
                 } else {
-                    $_SESSION['message'] = 'Thêm giảng viên không thành công *';
+                    $message = 'Thêm giảng viên không thành công *';
                     include 'admin/view_register_gv.php';
                     break;
                 }
             }else {
-                $_SESSION['message'] = 'Thêm không thành công *';
+                $message = 'Thêm không thành công *';
                 include 'admin/view_register_gv.php';
                 break;
             }
@@ -188,23 +188,23 @@ switch ($action) {
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
             if (is_valid_taikhoan($taikhoan)) {
-                $_SESSION['message'] = 'Tai khoan da ton tai';
+                $message = 'Tai khoan da ton tai';
                 include 'admin/view_register_sv.php';
                 break;
             }
 
             if (add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon)) {
                 if (add_sinhvien($taikhoan, $hovaten, $ngaysinh, $gioitinh, $doituong, $ctdt, $lop, $chuyennganh, $tinchitichluy)) {
-                    $_SESSION['message'] = 'Dang ky thanh cong';
+                    $message = 'Dang ky thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 } else {
-                    $_SESSION['message'] = 'add sinh vien khong thanh cong';
+                    $message = 'add sinh vien khong thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 }
             } else {
-                $_SESSION['message'] = 'add user khong thanh cong';
+                $message = 'add user khong thanh cong';
                 include 'admin/view_register_sv.php';
                 break;
             }

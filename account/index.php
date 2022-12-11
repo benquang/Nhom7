@@ -53,7 +53,7 @@ switch ($action) {
                 break;
             }
             else {
-                $_SESSION['message'] = "Ten dang nhap hoac mat khau khong hop le";
+                $message = "Ten dang nhap hoac mat khau khong hop le";
             }
         }
         include 'account/view_login.php';
@@ -93,14 +93,14 @@ switch ($action) {
 
             if (strcmp($pass,$confirm_pass))
             {
-                $_SESSION['message'] = "Mật khẩu xác nhận không đúng!!!";
+                $message = "Mật khẩu xác nhận không đúng!!!";
                 include 'account/changePass.php';
                 break;
             }
             $is_success = change_password($taikhoan,$pass);
             if (!$is_success)
             {
-                $_SESSION['message'] = "Thay đổi mật khẩu không thành công!";
+                $message = "Thay đổi mật khẩu không thành công!";
             }
 
         }

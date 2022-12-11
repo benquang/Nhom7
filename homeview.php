@@ -5,33 +5,9 @@
 ?>
     <div class="bang" style="width:78%">
       <div class="bang1" style="background-color: #f5f5f5;margin-top:5px">
-        <div class="bang_title">Thong bao</div>
+        <div class="bang_title">Thông báo</div>
         <!--<a class="bang_addgv">Add more</a>-->
       </div>
-      <?php 
-        echo $doc_root;
-      ?>
-      <br>
-      <?php 
-        echo $uri;
-      ?>
-      <br>
-      <?php 
-        echo $dirs[1];
-      ?>
-      <br>
-      <?php 
-        echo $dirs[2];
-      ?>
-      <br>
-      <?php 
-        echo $app_path;
-      ?>
-      <br>
-      <?php 
-        echo set_include_path($doc_root . $app_path);
-      ?>
-      <br>
 
       <!--<div class="bang_tencot">
         <div class="bang_tencot_1" style="width: 30%;">Tai khoan</div>

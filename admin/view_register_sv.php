@@ -1,10 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/database.php');
-    require_once('model/chuyennganh_db.php');
-    require_once('model/doituong_db.php');
-    require_once('model/ctdt_db.php');
-    require_once('model/sinhvien_db.php');
 
     if (!isset($taikhoan)) { $taikhoan = ''; } 
     if (!isset($pass)) { $pass = ''; } 
@@ -12,6 +7,7 @@
     if (!isset($ngaysinh)) { $ngaysinh = ''; } 
     if (!isset($lop)) { $lop = ''; } 
     if (!isset($tinchitichluy)) { $tinchitichluy = ''; } 
+    if (!isset($message)) { $message = ''; } 
 
     $admin_url = $app_path . 'admin';
     $view_update_sv_url = $admin_url . '?action=update_sv';
@@ -115,7 +111,7 @@
             </div>
 
         <div class="addgv_hangcuoi">
-            <div class="addgv_message"><?php echo $_SESSION['message']; ?></div>
+            <div class="addgv_message"><?php echo $message; ?></div>
             <input type="submit" value="Add" class="addgv_button">
         </div>
 
