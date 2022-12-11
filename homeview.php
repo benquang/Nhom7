@@ -13,18 +13,6 @@
       ?>
       <br>
       <?php 
-        echo $uri;
-      ?>
-      <br>
-      <?php 
-        echo $dirs[1];
-      ?>
-      <br>
-      <?php 
-        echo $dirs[2];
-      ?>
-      <br>
-      <?php 
         echo $app_path;
       ?>
       <br>
