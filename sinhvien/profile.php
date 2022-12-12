@@ -91,7 +91,13 @@
         <?php endif; ?>
         </a>
       <?php endif; ?>
-      <form action="../truongnhom" method="get">
+      <div class="addgv_hangcuoi">
+
+        <a href="<?php echo $app_path;?>truongnhom?action=nopbaocao&id=<?php echo $detai['id']; ?>" class="bang_hang_1" 
+        style="width: 13%;color: #0a426e; font-size:20px;font-weight:700;float:right">Nộp Báo Cáo</a>
+        </div>
+
+      <!--<form action="../truongnhom" method="get">
         <input type="hidden" name="action" value="nopbaocao">
         <input type="hidden" name="id" value="<?php echo $detai['id']; ?>">
 
@@ -99,7 +105,7 @@
               <div class="addgv_message"><?php echo $message; ?></div>
               <input type="submit" value="Nộp báo báo" class="addgv_button" style="background-color:#0a426e;float:right">
         </div>
-      </form>
+      </form>-->
       <div class="bang1">
         <div class="bang_title">Thành viên</div>
       </div>
