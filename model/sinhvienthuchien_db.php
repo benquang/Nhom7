@@ -56,6 +56,26 @@ function get_all_sinhvienthuchien_by_detai($detai){
         return null;
     }
 }
+function count_svthuchien_by_detai($detai){
+    global $db;
+    $query = '
+        select detai, count(sinhvien) from sinhvienthuchien group by detai having detai = :detai';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':detai', $detai);
+
+        $statement->execute();
+        $result = $statement->fetch();
+        
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 function count_svthuchien_by_detai_istruongnhom($detai){
     global $db;
     $query = '
