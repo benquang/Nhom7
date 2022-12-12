@@ -19,7 +19,7 @@
    <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
  </div>
  <div class="thanhtitle1">
-    <span class="thanhtitle3">Admin / Dang ky sinh vien</span>
+    <span class="thanhtitle3">Admin / Update thông tin sinh viên</span>
  </div>
 </div>
 

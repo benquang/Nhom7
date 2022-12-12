@@ -258,4 +258,43 @@ function update_gv_phanbien($id, $gvphanbien) { //void
         //return false;
     }
 }
+function delete_detai($id) { //void
+    global $db;
+
+    $query = '
+        delete from chitietdetai where id = :id';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':id', $id);
+
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+}
+function update_file_baocao($id,$file) { //void
+    global $db;
+
+    $query = '
+        update chitietdetai set "file" = :file where id = :id';
+
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':id', $id);
+        $statement->bindValue(':file', $file);
+
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        //return false;
+    }
+}
 ?>

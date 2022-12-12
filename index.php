@@ -56,6 +56,32 @@ switch ($action) {
     case 'view_chitietdetai':
         include 'view/chitietdetai.php';
         break;
+    case 'view_thongtingiangvien':
+        include 'view/thongtingiangvien.php';
+        break;
+    case 'find_gv':  
+        //GET
+        $search = filter_input(INPUT_GET, 'tukhoa');
+        if (!isset($search)) {
+            $search = '';
+        } 
+
+        $giangviens = get_giangviens_by_search($search);
+        include 'view/thongtingiangvien.php';
+        break;
+    case 'view_thongtinsinhvien':
+        include 'view/thongtinsinhvien.php';
+        break;
+    case 'find_sv':  
+        //GET
+        $search = filter_input(INPUT_GET, 'tukhoa');
+        if (!isset($search)) {
+            $search = '';
+        } 
+
+        $sinhviens = get_sinhviens_by_search($search);
+        include 'view/thongtinsinhvien.php';
+        break;
     case 'register_detai':
         require_once('util/valid_user.php');
         if (isset($_SESSION['gv'])){
@@ -67,6 +93,25 @@ switch ($action) {
             break; 
         }
         break;
+    case 'search_detai_by_chuyennganh':
+            //GET
+            $doituong = filter_input(INPUT_GET, 'doituong');
+            $hocky = filter_input(INPUT_GET, 'hocky');
+            $nienkhoa = filter_input(INPUT_GET, 'nienkhoa');
+            $loaidetai = filter_input(INPUT_GET, 'loaidetai');
+
+            $chuyennganh = filter_input(INPUT_GET, 'chuyennganh');
+            if (!isset($chuyennganh)) {
+                break;
+            } 
+            if ($chuyennganh == 'All') {
+                redirect($app_path . '?action=view_danhsachdetai&doituong='.$doituong.'&hocky='.$hocky.'&nienkhoa='.$nienkhoa.'&loaidetai='.$loaidetai);
+                break;
+            } 
+    
+            $detais = get_all_detai_by_danhmuc_chuyennganh($loaidetai,$doituong,$hocky,$nienkhoa,$chuyennganh);
+            include 'view/danhsachdetai.php';
+            break;
     default:
         display_error("Unknown account action: " . $action);
         break;

@@ -36,7 +36,7 @@ switch ($action) {
         include 'homeview.php';
         break;
     case 'profile':
-        include 'profile.php';
+        include 'giangvien/profile.php';
         break;
     case 'register_detai':
         if ($action == filter_input(INPUT_POST, 'action')){
@@ -158,6 +158,26 @@ switch ($action) {
 
         }
         include 'giangvien/view_register_detai.php';
+        break;
+    case 'delete_detai':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //id_detai
+            $id_detai = filter_input(INPUT_POST, 'id_detai');
+            if ($id_detai == NULL){//ko chonj maf xoas
+                $message = 'Vui lòng chọn đề tài';
+                include 'giangvien/profile.php';
+                break;  
+            }
+
+
+            //xoa trong sinhvienthuchien truoc
+            delete_sinhvienthuchien_by_detai($id_detai);
+            delete_detai($id_detai);
+            $message = 'Xóa thành công';
+
+
+        }
+        include 'giangvien/profile.php';
         break;
     default:
         display_error("Unknown account action: " . $action);

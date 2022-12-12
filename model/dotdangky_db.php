@@ -99,7 +99,8 @@ function get_all_phanloaidetai()
 function get_one_ddk($id){
     global $db;
     $query = '
-    SELECT * FROM dotdangky where id = :id';
+    SELECT * FROM dotdangky join dotdangky_doituong on dotdangky.id = dotdangky_doituong.dotdangky
+    where id = :id';
 
     try {
         $statement = $db->prepare($query);
@@ -162,11 +163,12 @@ function add_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $
     }
 }
 
-function update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaidetai){
+function update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $title, $status, $hinhthuc){
     global $db;
     $query = '
     UPDATE dotdangky SET batdau=:batdau, ketthuc=:ketthuc, hocky=:hocky,
-    nienkhoa=:nienkhoa, hinhthuc=:hinhthuc, loaidetai=:loaidetai WHERE id = :id';
+    nienkhoa=:nienkhoa, loaidetai=:loaidetai, file=:file, title=:title, status=:status,
+    hinhthuc=:hinhthuc WHERE id = :id';
     try {
         $statement = $db->prepare($query);
         $statement->bindValue(':id', $id);
@@ -174,8 +176,30 @@ function update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaid
         $statement->bindValue(':ketthuc', $ketthuc);
         $statement->bindValue(':hocky', $hocky);
         $statement->bindValue(':nienkhoa', $nienkhoa);
-        $statement->bindValue(':hinhthuc', $hinhthuc);
         $statement->bindValue(':loaidetai', $loaidetai);
+        $statement->bindValue(':file', $file);
+        $statement->bindValue(':title', $title);
+        $statement->bindValue(':status', $status);
+        $statement->bindValue(':hinhthuc', $hinhthuc);
+
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return false;
+    }
+}
+function update_ddk_doituong($dotdangky, $doituong){
+    global $db;
+    $query = '
+        update dotdangky_doituong set doituong = :doituong where dotdangky = :dotdangky';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':dotdangky', $dotdangky);
+        $statement->bindValue(':doituong', $doituong);
+
 
         $statement->execute();
         $statement->closeCursor();
@@ -224,7 +248,23 @@ function get_ddk_doituong($id)
         return null;
     }
 }
+function delete_ddk($id){
+    global $db;
+    $query = '
+        delete from dotdangky where id = :id';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':id', $id);
 
+        $statement->execute();
+        $statement->closeCursor();
+        return true;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return false;
+    }
+}
 function delete_ddk_doituong($id){
     global $db;
     $query = '
@@ -240,6 +280,121 @@ function delete_ddk_doituong($id){
         $error_message = $e->getMessage();
         display_db_error($error_message);
         return false;
+    }
+}
+
+
+//thong ke
+function get_unique_nienkhoa()
+{
+    global $db;
+    $query = '
+    SELECT DISTINCT nienkhoa
+	FROM dotdangky;';
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function get_unique_tenchuyennganh(){
+    global $db;
+    $query = '
+    SELECT DISTINCT tenchuyennganh
+	FROM chuyennganh;';
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function get_unique_loaidetai(){
+    global $db;
+    $query = '
+    SELECT DISTINCT loaidetai
+	FROM loaidetai;';
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+
+function count_detaitheonienkhoa($nienkhoa)
+{
+    global $db;
+    $query = '
+    select chuyennganh, count(\'tendetai\') from chitietdetai join dotdangky ON dotdangky.id = chitietdetai.dotdangky
+    where dotdangky.nienkhoa = :nienkhoa  
+    GROUP BY chuyennganh;';
+    try {
+        $statement = $db->prepare($query);
+        $statement -> bindValue(':nienkhoa', $nienkhoa);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function count_detaitheotenchuyennganh()
+{
+    global $db;
+    $query = '
+    select chuyennganh, count(\'tendetai\') from chitietdetai
+    GROUP BY chuyennganh;';
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+function count_detaitheoloaidetai($loaidetai)
+{
+    global $db;
+    $query = '
+    select chuyennganh, count(\'tendetai\') from chitietdetai
+    join dotdangky on chitietdetai.dotdangky = dotdangky.id
+    where loaidetai = :loaidetai
+    GROUP BY chuyennganh;';
+    try {
+        $statement = $db->prepare($query);
+        $statement->bindValue(':loaidetai',$loaidetai);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $statement->closeCursor();
+        return $result;
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
     }
 }
 ?>

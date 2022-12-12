@@ -10,23 +10,41 @@
         $hocky = filter_input(INPUT_GET, 'hocky');
         $nienkhoa = filter_input(INPUT_GET, 'nienkhoa');
         $loaidetai = filter_input(INPUT_GET, 'loaidetai');
+
+        $current_url = $app_path . '?action=view_danhsachdetai&doituong=' . $doituong . '&hocky=' . $hocky . '&nienkhoa=' . $nienkhoa . '&loaidetai=' . $loaidetai . '&page=';
+
       ?>
       <div class="bang1">
         <div class="bang_title" style="width:58%"><?php echo $loaidetai; ?> - <?php echo $doituong; ?> - Học kỳ <?php echo $hocky; ?> (<?php echo $nienkhoa; ?>)</div>
-        <select name="chuyennganh" style="height: 36px;font-size: 17px;margin-top:15px;float:right">
-                   <option value="All" >
-                        All
-                    </option>
-                    <?php          
-                      $chuyennganhs = get_all_chuyennganh();
-                      foreach($chuyennganhs as $chuyennganh) :
-                         $name = $chuyennganh['tenchuyennganh'];
-                    ?>
-                    <option value="<?php echo $name; ?>" >
-                        <?php echo $name; ?>
-                    </option>
-                    <?php endforeach; ?>
+        <form action="." method="get">
+        <input type="hidden" name="action" value="search_detai_by_chuyennganh">
+        <input type="hidden" name="doituong" value="<?php echo $doituong; ?>">
+        <input type="hidden" name="hocky" value="<?php echo $hocky; ?>">
+        <input type="hidden" name="nienkhoa" value="<?php echo $nienkhoa; ?>">
+        <input type="hidden" name="loaidetai" value="<?php echo $loaidetai; ?>">
+
+        <select name="chuyennganh" style="height: 36px;font-size: 17px;margin-top:15px;margin-left:50px">
+            <option value="All" >
+                All
+            </option>
+            <?php          
+              $chuyennganhs = get_all_chuyennganh();
+              foreach($chuyennganhs as $chuyennganh) :
+                  $name = $chuyennganh['tenchuyennganh'];
+            ?>
+            <?php if ($name == filter_input(INPUT_GET, 'chuyennganh')): ?>
+              <option value="<?php echo $name; ?>" selected>
+                <?php echo $name; ?>
+              </option>
+            <?php else: ?>
+              <option value="<?php echo $name; ?>" >
+                <?php echo $name; ?>
+              </option>
+            <?php endif; ?>
+            <?php endforeach; ?>
         </select>
+        <input type="submit" value="Get" class="addgv_button" style="background-color:#d3232a;width:10%;margin-top:12px">
+        <form>
       </div>
 
       <div class="bang_tencot">
@@ -35,10 +53,21 @@
         <div class="bang_tencot_1" style="width: 30%;margin-left:30px">GV hướng dẫn</div>
       </div>
       <?php 
+        $pag = 5;
+        $num_page = filter_input(INPUT_GET, 'page');   
+        if ($num_page == NULL) {
+          $num_page = 1;
+        }  
 
-        $detais = get_all_detai_by_danhmuc($loaidetai,$doituong,$hocky,$nienkhoa);
+        if (!isset($detais)) {
+          $detais = get_all_detai_by_danhmuc($loaidetai,$doituong,$hocky,$nienkhoa);
+        } 
+        else {
+          $pag = count($detais); //liet ke het
+        }
 
-        for ($i = 0; $i < count($detais); $i++):
+
+        for ($i = ($num_page * $pag) - $pag; $i < ($num_page * $pag) and $i < count($detais); $i++):
           $gv = get_one_giangvien($detais[$i]['gvhuongdan']);
           if (fmod($i,2) == 0): 
       ?>
@@ -59,6 +88,28 @@
       </div>
       <?php endif; ?>
       <?php endfor; ?>
+
+      <div class="pagina">
+      <?php     if ($num_page == 1): ?>
+        <a class="pagina_lui" 
+        style="background-color: #0a426e; border-color: #0a426e; color:#fff"><?php echo $num_page;?></a>
+          <?php     if ((count($detais)-$pag) > 0): ?>
+            <a href="<?php echo $current_url . $num_page + 1; ?>" 
+            class="pagina_lui"><?php echo $num_page + 1; ?></a>
+            <a href="<?php echo $current_url .  (int)(count($detais)/$pag) ?>" class="pagina_lui">-></a>
+          <?php endif; ?>
+      <?php elseif ($num_page * $pag == count($detais) or count($detais) - $num_page * $pag < 0):?>
+        <a href="<?php echo $current_url; ?>" class="pagina_lui"><-</a>
+        <a href="<?php echo $current_url . $num_page - 1; ?>" class="pagina_lui"><?php echo $num_page - 1;?></a>
+        <a style="background-color: #0a426e; border-color: #0a426e; color:#fff" class="pagina_lui"><?php echo $num_page; ?></a>
+      <?php else:?>
+        <a href="<?php echo $current_url; ?>" class="pagina_lui"><-</a>
+        <a href="<?php echo $current_url . $num_page - 1; ?>"  class="pagina_lui"><?php echo $num_page - 1;?></a>
+        <a class="pagina_lui" style="background-color: #0a426e; border-color: #0a426e; color:#fff"><?php echo $num_page; ?></a>
+        <a href="<?php echo $current_url . $num_page + 1; ?>"  class="pagina_lui"><?php echo $num_page + 1; ?></a>
+        <a href="<?php echo $current_url .  (int)(count($detais)/$pag) ?>" class="pagina_lui">-></a>
+      <?php endif; ?>
+      </div>
 
       </div>
 

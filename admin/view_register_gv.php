@@ -99,7 +99,7 @@
 
       </div>
       <?php
-          $pag = 20;
+          $pag = 5;
           $num_page = filter_input(INPUT_GET, 'page');   
           if ($num_page == NULL) {
             $num_page = 1;

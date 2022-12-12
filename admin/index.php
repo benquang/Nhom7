@@ -453,19 +453,21 @@ switch ($action) {
             $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
 
             //
-            $doituongs = get_all_doituong();
+            $doituong = filter_input(INPUT_POST, 'doituong');
 
             //add thanh cong
             add_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $title, $status, $hinhthuc);
 
+            //add đối tượng
+            add_ddk_doituong($id, $doituong);
             //var_dump($doituongs);
-            foreach($doituongs as $doituong):
+            /*foreach($doituongs as $doituong):
                 $input = filter_input(INPUT_POST, $doituong['doituong']);
                 if (isset($input)){
                     $input = $doituong['doituong'];
                     add_ddk_doituong($id, $input);
                 }
-            endforeach;   
+            endforeach;   */
 
             redirect($app_path . 'admin');
         }
@@ -474,6 +476,7 @@ switch ($action) {
     
     case 'update_ddk':
         if ($action == filter_input(INPUT_POST, 'action')){
+            //id
             $id = filter_input(INPUT_POST, 'id');
             $batdau = filter_input(INPUT_POST, 'batdau');
             $ketthuc = filter_input(INPUT_POST, 'ketthuc');
@@ -482,24 +485,37 @@ switch ($action) {
             $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
             $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
             $loaidetai = filter_input(INPUT_POST, 'loaidetai');
-            //xử lý sau
-            $doituongs = filter_input(INPUT_POST, 'doituongs');
-            $dts = get_all_doituong();
 
-            //add thanh cong
-            update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaidetai);
-            delete_doituong($id);
-            //var_dump($doituongs);
-            foreach($dts as $dt):
-                $input = (filter_input(INPUT_POST, $dt['doituong']));
-                if (isset($input)){
-                    add_doituong($id, $input);
-                }
-            endforeach; 
+            $file = filter_input(INPUT_POST, 'file');
+            $title = filter_input(INPUT_POST, 'title');
+            $status = filter_input(INPUT_POST, 'status');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
 
+            //
+            $doituong = filter_input(INPUT_POST, 'doituong');
+            update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $title, $status, $hinhthuc);
+            //update đối tượng
+            update_ddk_doituong($id,$doituong);
+
+            redirect($app_path . 'admin?action=register_ddk');
         }
 
-        include 'admin/temp.php';
+        include 'admin/view_update_ddk.php';
+        break;
+    case 'delete_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //id
+            $id = filter_input(INPUT_POST, 'id');
+
+            //xóa trong dotdangky_doituong trước
+            delete_ddk_doituong($id);
+            //xóa dotdangky
+            delete_ddk($id);
+
+            redirect($app_path . 'admin?action=register_ddk'); 
+        }
+
+        include 'admin/view_update_ddk.php';
         break;
     default:
         display_error("Unknown account action: " . $action);

@@ -12,6 +12,7 @@
     $view_regist_ddk_url = $admin_url . '?action=register_ddk';
 
     $view_loaidetai_url = $admin_url . '?action=update_loaidetai';
+    $view_nganhdaotao_url = $admin_url . '?action=update_nganhdaotao';
     $view_chuyennganh_url = $admin_url . '?action=update_chuyennganh';
     $view_ctdt_url = $admin_url . '?action=update_ctdt';
     $view_doituong_url = $admin_url . '?action=update_doituong';
@@ -68,13 +69,13 @@
             </span>
           </a>
         </li>
-        <li class="men4" style="margin-top: 12px;">
+        <!--<li class="men4" style="margin-top: 12px;">
           <a class="men5">
             <span class="men8">
               <span class="men9">HỘI ĐỒNG</span>
             </span>
           </a>
-        </li>
+        </li>-->
       </ul>
     </div>
     
@@ -138,13 +139,13 @@
             if (fmod($i,2) == 0): 
       ?>
       <div class="bang_hang" style="background-color: #f5f5f5">
-        <a href="<?php echo $view_loaidetai_url . '&nganhdaotao=' . $nganhdaotaos[$i]['tennganh']; ?>" class="bang_hang_1" style="width: 45%;"><?php echo $nganhdaotaos[$i]['tennganh']?></a>
+        <a href="<?php echo $view_nganhdaotao_url . '&nganhdaotao=' . $nganhdaotaos[$i]['tennganh']; ?>" class="bang_hang_1" style="width: 45%;"><?php echo $nganhdaotaos[$i]['tennganh']?></a>
         <div class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:55%">
           <?php echo $nganhdaotaos[$i]['mota']?></div>
       </div>
       <?php else:?>
       <div class="bang_hang">
-        <a href="<?php echo $view_loaidetai_url . '&nganhdaotao=' . $nganhdaotaos[$i]['tennganh']; ?>" class="bang_hang_1" style="width: 45%;"><?php echo $nganhdaotaos[$i]['tennganh']?></a>
+        <a href="<?php echo $view_nganhdaotao_url . '&nganhdaotao=' . $nganhdaotaos[$i]['tennganh']; ?>" class="bang_hang_1" style="width: 45%;"><?php echo $nganhdaotaos[$i]['tennganh']?></a>
         <div class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:55%">
           <?php echo $nganhdaotaos[$i]['mota']?></div>
       </div>

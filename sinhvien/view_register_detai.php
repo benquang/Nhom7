@@ -37,6 +37,7 @@
       <?php 
         $detais_cungchuyennganh = get_all_detai_by_dotdangky_cungchuyennganh($dotdangky['id'], $sv['chuyennganh']);
         foreach ($detais_cungchuyennganh as $detai):
+          $gv = get_one_giangvien($detai['gvhuongdan']);
           $count = count_svthuchien_by_detai($detai['id']);
           if ($count == NULL or ($count['count'] != NULL and $count['count'] < $detai['soluongsv'])): //chưa full?> 
             <div class="bang_hang">
@@ -44,7 +45,7 @@
             <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:45%">
               <?php echo $detai['tendetai']; ?></a>
             <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:25%;margin-left:30px">
-              <?php echo $detai['gvhuongdan']; ?></a>
+              <?php echo $gv['hovaten']; ?></a>
               <input type="radio" name="dangky" value="<?php echo $detai['id']; ?>" style="width: 20px;height: 20px;margin-left:50px;margin-top:14px">
           </div>
           <?php else:?>
@@ -53,7 +54,7 @@
             <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:45%">
               <?php echo $detai['tendetai']; ?></a>
             <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:25%;margin-left:30px">
-              <?php echo $detai['gvhuongdan']; ?></a>
+              <?php echo $gv['hovaten']; ?></a>
           </div>
         <?php endif;?>
 
@@ -77,6 +78,7 @@
       <?php 
         $detais_khacchuyennganh = get_all_detai_by_dotdangky_khacchuyennganh($dotdangky['id'], $sv['chuyennganh']);
         foreach ($detais_khacchuyennganh as $detai):
+          $gv = get_one_giangvien($detai['gvhuongdan']);
           $count = count_svthuchien_by_detai($detai['id']);
           if ($count == NULL or ($count['count'] != NULL and $count['count'] < $detai['soluongsv'])): //chưa full?> 
             <div class="bang_hang">
@@ -86,7 +88,7 @@
             <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:22%">
               <?php echo $detai['chuyennganh']; ?></a>
             <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:25%;margin-left:20px">
-              <?php echo $detai['gvhuongdan']; ?></a>
+              <?php echo $gv['hovaten']; ?></a>
               <input type="radio" name="dangky" value="<?php echo $detai['id']; ?>" style="width: 20px;height: 20px;margin-left:50px;margin-top:14px">
           </div>
           <?php else:?>

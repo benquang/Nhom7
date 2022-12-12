@@ -7,7 +7,7 @@
     <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
  </div>
  <div class="thanhtitle1">
-    <span class="thanhtitle3">Admin / Update instructor's information</span>
+    <span class="thanhtitle3">Admin / Update thông tin giảng viên</span>
  </div>
 </div>
 

@@ -3,9 +3,9 @@
 $doc_root = filter_input(INPUT_SERVER, 'DOCUMENT_ROOT', FILTER_SANITIZE_STRING);
 
 // Get the application path
-// $uri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING);
-// $dirs = explode('/', $uri);
-$app_path = '/';
+$uri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING);
+$dirs = explode('/', $uri);
+$app_path = '/' . $dirs[1] . '/' . $dirs[2] . '/';
 
 // Set the include path
 set_include_path($doc_root . $app_path);
@@ -36,5 +36,5 @@ function redirect($url) {
 // Start session to store user and cart data
 session_start();
 // thong bao moi trang web
-//$_SESSION['message'] = '';
+//$_SESSION['message_truongnhom'] = '';
 ?>
