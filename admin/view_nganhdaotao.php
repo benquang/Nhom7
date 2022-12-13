@@ -1,7 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/nganhdaotao_db.php');
-
     $admin_url = $app_path . 'admin';
 ?>
 
@@ -10,7 +8,7 @@
     <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
     </div>
     <div class="thanhtitle1">
-      <span class="thanhtitle3">Admin / Trang chủ</span>
+      <span class="thanhtitle3">Danh mục / Ngành đào tạo</span>
     </div>
   </div>
 
@@ -33,7 +31,7 @@
           $nganhdaotao = get_one_nganhdaotao($id); 
       ?>
       <form action="." method="post">
-        <input type="hidden" name="action" value="update_loaidetai">
+        <input type="hidden" name="action" value="update_nganhdaotao">
       <div class="bang_hang" style="background-color: #f5f5f5">
         <input type="textbox" name="id" value="<?php echo $nganhdaotao['tennganh']?>" class="tx_noneborder" style="width: 45%;" readonly>
         <input type="textbox" name="ghichu" value="<?php echo $nganhdaotao['mota']?>" class="tx_noneborder" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width:53%">
@@ -43,7 +41,7 @@
           <input type="submit" value="Update" class="addgv_button" style="margin-top:0px">
         </form>
         <form action="." method="post"> 
-          <input type="hidden" name="action" value="delete_loaidetai">
+          <input type="hidden" name="action" value="delete_nganhdaotao">
           <input type="hidden" name="id" value="<?php echo $nganhdaotao['tennganh']; ?>">
           <input type="submit" value="Delete" class="addgv_button" style="background-color: #d73d32;margin-top:0px">
         </form>

@@ -1,14 +1,12 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/database.php');
-    require_once('model/giangvien_db.php');
-    require_once('model/chuyennganh_db.php');
     
     if (!isset($taikhoan)) { $taikhoan = ''; } 
     if (!isset($pass)) { $pass = ''; } 
     if (!isset($hovaten)) { $hovaten = ''; } 
     if (!isset($cdkh)) { $cdkh = ''; } 
     if (!isset($chucvu)) { $chucvu = ''; } 
+    if (!isset($message)) { $message = ''; } 
 
     $admin_url = $app_path . 'admin';
     $view_update_gv_url = $admin_url . '?action=update_gv';
@@ -75,7 +73,7 @@
             </div>
         </div>
         <div class="addgv_hangcuoi">
-              <div class="addgv_message"><?php echo $_SESSION['message']; ?></div>
+              <div class="addgv_message"><?php echo $message; ?></div>
               <input type="submit" value="Add" class="addgv_button">
         </div>
 
@@ -101,7 +99,7 @@
 
       </div>
       <?php
-          $pag = 20;
+          $pag = 5;
           $num_page = filter_input(INPUT_GET, 'page');   
           if ($num_page == NULL) {
             $num_page = 1;

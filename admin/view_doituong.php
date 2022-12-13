@@ -1,7 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/doituong_db.php');
-
     $admin_url = $app_path . 'admin';
 ?>
 

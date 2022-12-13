@@ -1,5 +1,8 @@
 <?php
     $danhmucdetai_url = $app_path . '?action=view_danhmucdetai';
+    $thongke_url = $app_path . 'statistic?action=default';
+    $thongtingiangvien_url = $app_path . '?action=view_thongtingiangvien';
+    $thongtinsinhvienvien_url = $app_path . '?action=view_thongtinsinhvien';
 
 ?>
 <br><br>
@@ -22,7 +25,7 @@
         <li class="men4" style="margin-top: 12px;border: 1px solid #dadada">
           <a href="<?php echo $danhmucdetai_url; ?>" class="men5" style="border-bottom: 0px">
             <span class="men6">
-              <img class="men7"src="<?php echo $app_path?>img/detailogo.png" alt="a">
+              <img class="men7" src="<?php echo $app_path?>img/detailogo.png" alt="a">
             </span>
             <span class="men8">
               <span class="men9" style="margin-left:0px">Đề tài</span>
@@ -30,7 +33,7 @@
           </a>
         </li>
         <li class="men4" style="margin-top: 12px;border: 1px solid #dadada">
-          <a class="men5" style="border-bottom: 0px">
+          <a href="<?php echo $thongtingiangvien_url; ?>" class="men5" style="border-bottom: 0px">
             <span class="men6">
               <img class="men7"src="<?php echo $app_path?>img/gvlogo.png" alt="a">
             </span>
@@ -40,7 +43,7 @@
           </a>
         </li>
         <li class="men4" style="margin-top: 12px;border: 1px solid #dadada">
-          <a class="men5" style="border-bottom: 0px">
+          <a href="<?php echo $thongtinsinhvienvien_url; ?>" class="men5" style="border-bottom: 0px">
             <span class="men6">
               <img class="men7"src="<?php echo $app_path?>img/sv.png" alt="a">
             </span>
@@ -50,7 +53,7 @@
           </a>
         </li>
         <li class="men4" style="margin-top: 12px;border: 1px solid #dadada">
-          <a class="men5" style="border-bottom: 0px">
+          <a href="<?php echo $thongke_url; ?>" class="men5" style="border-bottom: 0px">
             <span class="men6">
               <img class="men7"src="<?php echo $app_path?>img/thongkelogo.png" alt="a">
             </span>
@@ -59,7 +62,7 @@
             </span>
           </a>
         </li>
-        <li class="men4" style="margin-top: 12px;border: 1px solid #dadada">
+        <!--<li class="men4" style="margin-top: 12px;border: 1px solid #dadada">
           <a class="men5" style="border-bottom: 0px">
             <span class="men6">
               <img class="men7"src="<?php echo $app_path?>img/searchlogo.jpg" alt="a">
@@ -68,7 +71,7 @@
               <span class="men9" style="margin-left:0px">Tìm kiếm</span>
             </span>
           </a>
-        </li>
+        </li>-->
       </ul>
     </div>
     </div>

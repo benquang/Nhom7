@@ -36,7 +36,7 @@ switch ($action) {
         include 'homeview.php';
         break;
     case 'profile':
-        include 'profile.php';
+        include 'giangvien/profile.php';
         break;
     case 'register_detai':
         if ($action == filter_input(INPUT_POST, 'action')){
@@ -70,31 +70,31 @@ switch ($action) {
             $au2 = is_sv_thuocdoituong($sv2,$ddk_doituong);
 
             if ($sv1 != NULL and $sv2 != NULL and $sv1 == $sv2){ //trùng nhau
-                $_SESSION['message'] = 'Nhập sinh viên không được trùng nhau';
+                $message = 'Nhập sinh viên không được trùng nhau';
                 include 'giangvien/view_register_detai.php';
                 break;
             }
 
             if ($sv1 != NULL){
                 if (is_valid_taikhoan($sv1) == FALSE){ //ko ton tai sinh vien
-                    $_SESSION['message'] = 'Sinh viên 1 không tồn tại';
+                    $message = 'Sinh viên 1 không tồn tại';
                     include 'giangvien/view_register_detai.php';
                     break;
                 }
                 if ($au1 == FALSE){ //sv1 ko thuoc doituong
-                    $_SESSION['message'] = 'Sinh viên 1 không thuộc đối tượng đăng ký, vui lòng nhập lại';
+                    $message = 'Sinh viên 1 không thuộc đối tượng đăng ký, vui lòng nhập lại';
                     include 'giangvien/view_register_detai.php';
                     break;
                 }
             }
             if ($sv2 != NULL){
                 if (is_valid_taikhoan($sv2) == FALSE){ //ko ton tai sinh vien
-                    $_SESSION['message'] = 'Sinh viên 2 không tồn tại';
+                    $message = 'Sinh viên 2 không tồn tại';
                     include 'giangvien/view_register_detai.php';
                     break;
                 }
                 if ($au2 == FALSE){ //sv1 ko thuoc doituong
-                    $_SESSION['message'] = 'Sinh viên 2 không thuộc đối tượng đăng ký, vui lòng nhập lại';
+                    $message = 'Sinh viên 2 không thuộc đối tượng đăng ký, vui lòng nhập lại';
                     include 'giangvien/view_register_detai.php';
                     break;
                 }
@@ -106,14 +106,14 @@ switch ($action) {
 
                 if ($sv1 != NULL){
                     if ($in1 == FALSE){ //sv1 ko thuoc chuyen nganh
-                        $_SESSION['message'] = 'Sinh viên 1 không thuộc chuyên ngành, vui lòng nhập lại';
+                        $message = 'Sinh viên 1 không thuộc chuyên ngành, vui lòng nhập lại';
                         include 'giangvien/view_register_detai.php';
                         break;
                     }
                 }
                 if ($sv2 != NULL){
                     if ($in2 == FALSE){ //sv1 ko thuoc doituong
-                        $_SESSION['message'] = 'Sinh viên 2 không thuộc chuyên ngành, vui lòng nhập lại';
+                        $message = 'Sinh viên 2 không thuộc chuyên ngành, vui lòng nhập lại';
                         include 'giangvien/view_register_detai.php';
                         break;
                     }
@@ -122,7 +122,7 @@ switch ($action) {
             }
 
             if ($soluongsv == '1' and $sv1 != NULL and $sv2 != NULL){//nhập số lượng 1 nhưng nhưng điền cả 2 sv
-                $_SESSION['message'] = 'Số lượng không phù hợp, vui lòng nhập lại';
+                $message = 'Số lượng không phù hợp, vui lòng nhập lại';
                 include 'giangvien/view_register_detai.php';
                 break;  
             }
@@ -158,6 +158,26 @@ switch ($action) {
 
         }
         include 'giangvien/view_register_detai.php';
+        break;
+    case 'delete_detai':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //id_detai
+            $id_detai = filter_input(INPUT_POST, 'id_detai');
+            if ($id_detai == NULL){//ko chonj maf xoas
+                $message = 'Vui lòng chọn đề tài';
+                include 'giangvien/profile.php';
+                break;  
+            }
+
+
+            //xoa trong sinhvienthuchien truoc
+            delete_sinhvienthuchien_by_detai($id_detai);
+            delete_detai($id_detai);
+            $message = 'Xóa thành công';
+
+
+        }
+        include 'giangvien/profile.php';
         break;
     default:
         display_error("Unknown account action: " . $action);

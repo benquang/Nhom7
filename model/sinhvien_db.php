@@ -171,4 +171,42 @@ function delete_sinhvien($taikhoan)
 
     }
 }
+
+
+//thong ke
+function count_sinhvien()
+{
+    global $db;
+    $query = '
+    SELECT COUNT(\'user\') from sinhvien';
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
+
+function count_giangvien()
+{
+    global $db;
+    $query = '
+    SELECT COUNT(\'user\') from giangvien';
+    try {
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $statement->closeCursor();
+        //return true;
+
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        display_db_error($error_message);
+        return null;
+    }
+}
 ?>

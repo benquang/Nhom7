@@ -1,7 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/loaidetai_db.php');
-
     $admin_url = $app_path . 'admin';
 ?>
 
@@ -10,7 +8,7 @@
     <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
     </div>
     <div class="thanhtitle1">
-      <span class="thanhtitle3">Admin / Trang chủ</span>
+      <span class="thanhtitle3">Danh mục / Loại đề tài</span>
     </div>
   </div>
 
@@ -20,13 +18,13 @@
   <div style="overflow: auto;">
   <div class="bang" style="width: 895px; margin-bottom: 15px">
       <div class="bang1">
-        <div class="bang_title">Loai De Tai</div>
+        <div class="bang_title">Loại Đề Tài</div>
         <!--<a class="bang_addgv" style="width:30%">Add more</a>-->
       </div>
 
       <div class="bang_tencot">
-        <div class="bang_tencot_1" style="width: 45%;">Loai de tai</div>
-        <div class="bang_tencot_1" style="width:55%">Mo ta</div>
+        <div class="bang_tencot_1" style="width: 45%;">Loại đề tài</div>
+        <div class="bang_tencot_1" style="width:55%">Mô tả</div>
       </div>
       <?php 
           $id = filter_input(INPUT_GET, 'loaidetai');

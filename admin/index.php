@@ -64,19 +64,19 @@ switch ($action) {
 
             //user phai unique
             if (is_valid_taikhoan($taikhoan)) {
-                $_SESSION['message'] = 'Tài khoản đã tồn tại *';
+                $message = 'Tài khoản đã tồn tại *';
                 include 'admin/view_register_gv.php';
                 break;
             }
             //password not empty
             if ($pass == ''){
-                $_SESSION['message'] = 'Password không được rỗng *';
+                $message = 'Password không được rỗng *';
                 include 'admin/view_register_gv.php';
                 break;
             }
             //hovaten not empty
             if ($hovaten == ''){
-                $_SESSION['message'] = 'Họ và tên không được rỗng *';
+                $message = 'Họ và tên không được rỗng *';
                 include 'admin/view_register_gv.php';
                 break;
             }
@@ -84,16 +84,16 @@ switch ($action) {
             //add user rồi tới giảng viên
             if(add_user($taikhoan,$pass,$is_admin,$is_gv,$is_sv,$is_truongbomon)) {
                 if(add_giangvien($taikhoan,$hovaten,$cdkh,$chuyennganh,$chucvu)){
-                    $_SESSION['message'] = 'Thêm thành công !';
+                    $message = 'Thêm thành công !';
                     include 'admin/view_register_gv.php';
                     break;
                 } else {
-                    $_SESSION['message'] = 'Thêm giảng viên không thành công *';
+                    $message = 'Thêm giảng viên không thành công *';
                     include 'admin/view_register_gv.php';
                     break;
                 }
             }else {
-                $_SESSION['message'] = 'Thêm không thành công *';
+                $message = 'Thêm không thành công *';
                 include 'admin/view_register_gv.php';
                 break;
             }
@@ -188,23 +188,23 @@ switch ($action) {
             $tinchitichluy = filter_input(INPUT_POST, 'tinchitichluy');
 
             if (is_valid_taikhoan($taikhoan)) {
-                $_SESSION['message'] = 'Tai khoan da ton tai';
+                $message = 'Tai khoan da ton tai';
                 include 'admin/view_register_sv.php';
                 break;
             }
 
             if (add_user($taikhoan, $password, $is_admin, $is_gv, $is_sv, $is_truongbomon)) {
                 if (add_sinhvien($taikhoan, $hovaten, $ngaysinh, $gioitinh, $doituong, $ctdt, $lop, $chuyennganh, $tinchitichluy)) {
-                    $_SESSION['message'] = 'Dang ky thanh cong';
+                    $message = 'Dang ky thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 } else {
-                    $_SESSION['message'] = 'add sinh vien khong thanh cong';
+                    $message = 'add sinh vien khong thanh cong';
                     include 'admin/view_register_sv.php';
                     break;
                 }
             } else {
-                $_SESSION['message'] = 'add user khong thanh cong';
+                $message = 'add user khong thanh cong';
                 include 'admin/view_register_sv.php';
                 break;
             }
@@ -453,19 +453,21 @@ switch ($action) {
             $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
 
             //
-            $doituongs = get_all_doituong();
+            $doituong = filter_input(INPUT_POST, 'doituong');
 
             //add thanh cong
             add_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $title, $status, $hinhthuc);
 
+            //add đối tượng
+            add_ddk_doituong($id, $doituong);
             //var_dump($doituongs);
-            foreach($doituongs as $doituong):
+            /*foreach($doituongs as $doituong):
                 $input = filter_input(INPUT_POST, $doituong['doituong']);
                 if (isset($input)){
                     $input = $doituong['doituong'];
                     add_ddk_doituong($id, $input);
                 }
-            endforeach;   
+            endforeach;   */
 
             redirect($app_path . 'admin');
         }
@@ -474,6 +476,7 @@ switch ($action) {
     
     case 'update_ddk':
         if ($action == filter_input(INPUT_POST, 'action')){
+            //id
             $id = filter_input(INPUT_POST, 'id');
             $batdau = filter_input(INPUT_POST, 'batdau');
             $ketthuc = filter_input(INPUT_POST, 'ketthuc');
@@ -482,24 +485,37 @@ switch ($action) {
             $nienkhoa = filter_input(INPUT_POST, 'nienkhoa');
             $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
             $loaidetai = filter_input(INPUT_POST, 'loaidetai');
-            //xử lý sau
-            $doituongs = filter_input(INPUT_POST, 'doituongs');
-            $dts = get_all_doituong();
 
-            //add thanh cong
-            update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $hinhthuc, $loaidetai);
-            delete_doituong($id);
-            //var_dump($doituongs);
-            foreach($dts as $dt):
-                $input = (filter_input(INPUT_POST, $dt['doituong']));
-                if (isset($input)){
-                    add_doituong($id, $input);
-                }
-            endforeach; 
+            $file = filter_input(INPUT_POST, 'file');
+            $title = filter_input(INPUT_POST, 'title');
+            $status = filter_input(INPUT_POST, 'status');
+            $hinhthuc = filter_input(INPUT_POST, 'hinhthuc');
 
+            //
+            $doituong = filter_input(INPUT_POST, 'doituong');
+            update_ddk($id, $batdau, $ketthuc, $hocky, $nienkhoa, $loaidetai, $file, $title, $status, $hinhthuc);
+            //update đối tượng
+            update_ddk_doituong($id,$doituong);
+
+            redirect($app_path . 'admin?action=register_ddk');
         }
 
-        include 'admin/temp.php';
+        include 'admin/view_update_ddk.php';
+        break;
+    case 'delete_ddk':
+        if ($action == filter_input(INPUT_POST, 'action')){
+            //id
+            $id = filter_input(INPUT_POST, 'id');
+
+            //xóa trong dotdangky_doituong trước
+            delete_ddk_doituong($id);
+            //xóa dotdangky
+            delete_ddk($id);
+
+            redirect($app_path . 'admin?action=register_ddk'); 
+        }
+
+        include 'admin/view_update_ddk.php';
         break;
     default:
         display_error("Unknown account action: " . $action);

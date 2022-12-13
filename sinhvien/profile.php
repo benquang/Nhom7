@@ -1,6 +1,8 @@
 <?php include '../view/header.php'; ?>
 <?php   
   $chitietdetai_url = $app_path . '?action=view_chitietdetai';
+  if (!isset($message)) { $message = ''; } 
+
 ?>
 <div class="thanhtitle"  style="margin-bottom: 20px;">
  <div class="thanhtitle1">
@@ -79,17 +81,31 @@
       <?php if ($detai != NULL): ?>
       <div class="bang_hang">
         <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="width: 10%;"><?php echo $detai['id']; ?></a>
-        <div class="bang_hang_1" style="width: 53%;"><?php echo $detai['tendetai']; ?></div>
+        <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="width: 53%;"><?php echo $detai['tendetai']; ?></a>
         <?php $gv = get_one_giangvien($detai['gvhuongdan']); ?>
-          <div class="bang_hang_1" style="width: 25%;"><?php echo $gv['hovaten']; ?></div>
+          <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="width: 25%;"><?php echo $gv['hovaten']; ?></a>
         <?php if ($detai['is_truongnhom'] == '1'): ?>
-          <div class="bang_hang_1" style="width: 12%;"><input type="checkbox" style="width: 20px;height: 20px;margin-left:40px" checked disabled="disabled"></div>
+          <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="width: 12%;"><input type="checkbox" style="width: 20px;height: 20px;margin-left:40px" checked disabled="disabled"></a>
         <?php else: ?>
-          <div class="bang_hang_1" style="width: 12%;"><input type="checkbox" style="width: 20px;height: 20px;margin-left:40px" disabled="disabled"></div>
+          <a href="<?php echo $chitietdetai_url; ?>&id=<?php echo $detai['id']; ?>" class="bang_hang_1" style="width: 12%;"><input type="checkbox" style="width: 20px;height: 20px;margin-left:40px" disabled="disabled"></a>
         <?php endif; ?>
-        </div>
+        </a>
       <?php endif; ?>
+      <div class="addgv_hangcuoi">
 
+        <a href="<?php echo $app_path;?>truongnhom?action=nopbaocao&id=<?php echo $detai['id']; ?>" class="bang_hang_1" 
+        style="width: 13%;color: #0a426e; font-size:20px;font-weight:700;float:right">Nộp Báo Cáo</a>
+        </div>
+
+      <!--<form action="../truongnhom" method="get">
+        <input type="hidden" name="action" value="nopbaocao">
+        <input type="hidden" name="id" value="<?php echo $detai['id']; ?>">
+
+        <div class="addgv_hangcuoi">
+              <div class="addgv_message"><?php echo $message; ?></div>
+              <input type="submit" value="Nộp báo báo" class="addgv_button" style="background-color:#0a426e;float:right">
+        </div>
+      </form>-->
       <div class="bang1">
         <div class="bang_title">Thành viên</div>
       </div>
@@ -136,4 +152,3 @@
 
     </div>
 </div>
-<?php include '../view/footer.php'; ?>

@@ -5,7 +5,7 @@
 ?>
     <div class="bang" style="width:78%">
       <div class="bang1" style="background-color: #f5f5f5;margin-top:5px">
-        <div class="bang_title">Thong bao</div>
+        <div class="bang_title">Thông báo</div>
         <!--<a class="bang_addgv">Add more</a>-->
       </div>
 

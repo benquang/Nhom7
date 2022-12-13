@@ -120,10 +120,10 @@
         <div class="bang_hang_1" style="width: 49%;border-left: 1px solid #dee2e6;padding-left:10px">
         <?php echo $detai['diemdetai']; ?></div>
       </div> 
-      <div class="addgv_hangcuoi">
+      <!--<div class="addgv_hangcuoi">
         <div class="addgv_message"></div>
         <input type="submit" value="Update" class="addgv_button">
-      </div>
+      </div>-->
     </div>
 
     

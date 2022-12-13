@@ -19,7 +19,7 @@
       <div class="bang_hang" style="border:1px solid #dee2e6;margin-top:10px;margin-bottom:10px;background-color: #f5f5f5">
         <div class="bang_hang_1" style="width: 20%;text-align:center;background-color:#0a426e;
              line-height:30px;color:#fff;margin-right:10px;margin-top:10px;border-radius: 2px;font-weight:700"><?php echo $dotdangky['batdau']; ?></div>
-        <a href="" class="bang_hang_1" style="width: 70%;"><?php echo $dotdangky['title']; ?></a>
+        <div class="bang_hang_1" style="width: 70%;"><?php echo $dotdangky['title']; ?></div>
       </div>
       <iframe src="<?php echo $dotdangky['file']; ?>" 
         width="100%" height="480" allow="autoplay"></iframe>

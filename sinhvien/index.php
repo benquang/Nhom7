@@ -71,7 +71,7 @@ switch ($action) {
                 include 'sinhvien/view_register_detai.php';
                 break; 
             }*/
-            $count = count_svthuchien_by_detai($dangky);
+            $count = count_svthuchien_by_detai_istruongnhom($dangky);
             if ($count != NULL){ //đã có nhóm trưởng
                 add_sinhvienthuchien($dangky,$sv,'false');
                 $message = 'Đăng ký thành công';

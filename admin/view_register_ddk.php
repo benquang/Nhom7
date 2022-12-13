@@ -1,18 +1,15 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/database.php');
-    require_once('model/loaidetai_db.php');
-    require_once('model/dotdangky_db.php');
-    require_once('model/doituong_db.php');
-
     $admin_url = $app_path . 'admin';
+    $update_ddk_url = $admin_url . '?action=update_ddk';
+
 ?>
 <div class="thanhtitle"  style="margin-bottom: 20px;">
  <div class="thanhtitle1">
     <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
  </div>
  <div class="thanhtitle1">
-    <span class="thanhtitle3">Admin / Đợt đăng ký</span>
+    <span class="thanhtitle3">Admin / Thông báo | Đợt đăng ký</span>
  </div>
 </div>
 
@@ -98,7 +95,7 @@
             ?>
             <div class="addgv_tb" style="width: 10%;">
                 <div class="addgv_tb1"><?php echo $doituong['doituong']; ?></div>
-                <input type="checkbox" name="<?php echo $doituong['doituong']; ?>" style="width: 20px;height: 20px">
+                <input type="radio" name="doituong" value="<?php echo $doituong['doituong']; ?>" style="width: 20px;height: 20px">
             </div>
             <?php endforeach; ?>
         </div>
@@ -106,12 +103,47 @@
               <div class="addgv_message"></div>
               <input type="submit" value="Add" class="addgv_button">
         </form>
-            <form action="." method="post">
-                <input type="hidden" name="action" value="delete_gv">
-                <input type="hidden" name="taikhoan" value="<?php echo $giangvien['user']; ?>">
-                <input type="submit" value="Delete" class="addgv_button" style="background-color: #d73d32">
-              </form>
         </div>
+
+      <div class="bang_tencot">
+        <div class="bang_tencot_1" style="width: 10%;">ID</div>
+        <div class="bang_tencot_1" style="width: 40%;">Title</div>
+        <div class="bang_tencot_1" style="width: 20%;">Hình thức</div>
+        <div class="bang_tencot_1" style="width: 10%;">Học kỳ</div>
+        <div class="bang_tencot_1" style="width: 20%;">Niên khóa</div>
+
+      </div>
+      <?php 
+       $ddks = get_all_ddk();
+       for ($i = 0; $i < count($ddks); $i++):
+      ?>
+      <?php     if (fmod($i,2) == 0): ?>
+      <div class="bang_hang" style="background-color: #f5f5f5">
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 10%;"><?php echo $ddks[$i]['id']?></a>
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 40%;"><?php echo $ddks[$i]['title']?></a>
+        <?php if ($ddks[$i]['hinhthuc'] == '1'): ?>
+            <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 20%;">Đăng ký</a>
+        <?php else:?>
+            <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 20%;">Thông báo</a>
+        <?php endif; ?>
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 10%;"><?php echo $ddks[$i]['hocky']?></a>
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 20%;"><?php echo $ddks[$i]['nienkhoa']?></a>
+      </div>
+      <?php else:?>
+      <div class="bang_hang">
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 10%;"><?php echo $ddks[$i]['id']?></a>
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 40%;"><?php echo $ddks[$i]['title']?></a>
+        <?php if ($ddks[$i]['hinhthuc'] == '1'): ?>
+            <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 20%;">Đăng ký</a>
+        <?php else:?>
+            <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 20%;">Thông báo</a>
+        <?php endif; ?>
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 10%;"><?php echo $ddks[$i]['hocky']?></a>
+        <a href="<?php echo $update_ddk_url; ?>&id=<?php echo $ddks[$i]['id']; ?>" class="bang_hang_1" style="width: 20%;"><?php echo $ddks[$i]['nienkhoa']?></a>
+      </div>
+      <?php endif; ?>
+      <?php endfor; ?>
+
 
     
  </div>

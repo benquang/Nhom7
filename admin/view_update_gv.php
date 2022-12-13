@@ -1,9 +1,5 @@
 <?php include '../view/header.php'; ?>
 <?php   
-    require_once('model/database.php');
-    require_once('model/chuyennganh_db.php');
-    require_once('model/giangvien_db.php');
-
     $admin_url = $app_path . 'admin';
 ?>
 <div class="thanhtitle"  style="margin-bottom: 20px;">
@@ -11,7 +7,7 @@
     <a href="<?php echo $admin_url; ?>" class="thanhtitle2">Admin</a>
  </div>
  <div class="thanhtitle1">
-    <span class="thanhtitle3">Admin / Update instructor's information</span>
+    <span class="thanhtitle3">Admin / Update thông tin giảng viên</span>
  </div>
 </div>
 
