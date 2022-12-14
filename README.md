@@ -2,8 +2,9 @@
 ### Nhóm 7
 #### Thành viên nhóm:
 * Nguyễn Khoa Quang Thắng - 20133090
-* Trần Văn Kiệt - 20110650
+* Trần Văn Kiệt - 20110665
 * Nguyễn Trí Dũng - 20133029
+## Host: https://group7-registertheme7.herokuapp.com/
 ## Yêu cầu
 - PHP 7 trở lên.
 
